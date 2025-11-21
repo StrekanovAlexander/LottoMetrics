@@ -1,0 +1,8 @@
+__history
+__recovery
+*.dcu
+*.exe
+*.identcache
+*.local
+*.log
+Win32
