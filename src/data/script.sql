@@ -55,3 +55,40 @@ CREATE INDEX idx_draws_lottery_id ON draws(lottery_id);
 CREATE INDEX idx_draw_numbers_draw_id ON draw_numbers(draw_id);
 CREATE INDEX idx_draw_numbers_number ON draw_numbers(number);
 CREATE INDEX idx_draw_numbers_number_kind ON draw_numbers(number_kind);
+
+CREATE OR ALTER PROCEDURE fill_draw_numbers
+AS
+DECLARE VARIABLE v_draw_id INTEGER;
+DECLARE VARIABLE v_main_numbers VARCHAR(50);
+DECLARE VARIABLE v_extra_numbers VARCHAR(20);
+DECLARE VARIABLE v_num VARCHAR(5);
+DECLARE VARIABLE v_pos INTEGER;
+BEGIN
+  FOR SELECT id, main_numbers, extra_numbers
+      FROM draws
+      INTO :v_draw_id, :v_main_numbers, :v_extra_numbers
+  DO
+  BEGIN
+    WHILE (CHAR_LENGTH(:v_main_numbers) > 0) DO
+    BEGIN
+      v_pos = POSITION(',' IN :v_main_numbers);
+      IF (v_pos > 0) THEN
+      BEGIN
+        v_num = SUBSTRING(:v_main_numbers FROM 1 FOR v_pos-1);
+        v_main_numbers = SUBSTRING(:v_main_numbers FROM v_pos+1);
+      END
+      ELSE
+      BEGIN
+        v_num = :v_main_numbers;
+        v_main_numbers = '';
+      END
+      INSERT INTO draw_numbers(draw_id, number, number_kind)
+      VALUES (:v_draw_id, CAST(:v_num AS SMALLINT), 'main');
+    END
+    IF (:v_extra_numbers IS NOT NULL AND :v_extra_numbers <> '') THEN
+    BEGIN
+      INSERT INTO draw_numbers(draw_id, number, number_kind)
+      VALUES (:v_draw_id, CAST(:v_extra_numbers AS SMALLINT), 'extra');
+    END
+  END
+END
