@@ -4,27 +4,67 @@ object frmDraws: TfrmDraws
   Top = 0
   Width = 640
   Height = 480
-  Margins.Left = 15
-  Margins.Top = 15
-  Margins.Right = 15
-  Margins.Bottom = 15
+  Margins.Left = 0
+  Margins.Top = 0
+  Margins.Right = 0
+  Margins.Bottom = 0
+  Color = clWindow
+  ParentBackground = False
+  ParentColor = False
   TabOrder = 0
-  object lblTitle: TLabel
+  object pnlContainer: TPanel
     AlignWithMargins = True
-    Left = 3
-    Top = 3
-    Width = 634
-    Height = 30
-    Align = alTop
-    Caption = 'lblTitle'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -21
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentFont = False
+    Left = 25
+    Top = 20
+    Width = 590
+    Height = 440
+    Margins.Left = 25
+    Margins.Top = 20
+    Margins.Right = 25
+    Margins.Bottom = 20
+    Align = alClient
+    BevelOuter = bvNone
+    Color = clWindow
+    ParentBackground = False
+    TabOrder = 0
     ExplicitLeft = 0
     ExplicitTop = 0
-    ExplicitWidth = 68
+    ExplicitWidth = 640
+    ExplicitHeight = 480
+    object lblTitle: TLabel
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 584
+      Height = 45
+      Align = alTop
+      Caption = 'lblTitle'
+      Font.Charset = RUSSIAN_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -32
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ExplicitLeft = 4
+      ExplicitTop = 4
+      ExplicitWidth = 98
+    end
+    object sbDraws: TScrollBox
+      AlignWithMargins = True
+      Left = 3
+      Top = 71
+      Width = 584
+      Height = 366
+      Margins.Top = 20
+      Align = alClient
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      BorderStyle = bsNone
+      TabOrder = 0
+      ExplicitLeft = 4
+      ExplicitTop = 248
+      ExplicitWidth = 632
+      ExplicitHeight = 228
+    end
   end
 end

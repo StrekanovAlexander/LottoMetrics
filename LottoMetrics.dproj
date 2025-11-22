@@ -141,6 +141,12 @@
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
+        <DCCReference Include="src\models\uDraw.pas"/>
+        <DCCReference Include="src\utils\uNumberUtils.pas"/>
+        <DCCReference Include="src\utils\uDateUtils.pas"/>
+        <DCCReference Include="src\ui\uDrawBand.pas"/>
+        <DCCReference Include="src\ui\uColors.pas"/>
+        <DCCReference Include="src\ui\uBall.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

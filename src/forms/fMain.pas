@@ -102,6 +102,7 @@ begin
     Parent := pnlMain;
     Align := alClient;
     lblTitle.Caption := 'Результаты розыгрышей';
+    RenderDraws;
   end;
 
 end;
