@@ -22,4 +22,11 @@ object DM: TDM
     Left = 136
     Top = 24
   end
+  object FDQuerySelect: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      'SELECT * FROM lotteries')
+    Left = 32
+    Top = 112
+  end
 end
