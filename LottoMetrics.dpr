@@ -9,9 +9,7 @@ uses
   uDraw in 'src\models\uDraw.pas',
   uNumberUtils in 'src\utils\uNumberUtils.pas',
   uDateUtils in 'src\utils\uDateUtils.pas',
-  uDrawBand in 'src\ui\uDrawBand.pas',
-  uColors in 'src\ui\uColors.pas',
-  uBall in 'src\ui\uBall.pas';
+  uGrids in 'src\ui\uGrids.pas';
 
 {$R *.res}
 

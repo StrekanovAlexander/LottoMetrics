@@ -9,7 +9,7 @@ uses
   Data.DB, FireDAC.Comp.Client, FireDAC.Phys.FBDef, FireDAC.Phys.IBBase,
   FireDAC.Phys.FB, Vcl.Dialogs, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.Generics.Collections,
-  uLottery;
+  uLottery, uDraw;
 
 type
   TDM = class(TDataModule)
@@ -20,8 +20,14 @@ type
     procedure DataModuleDestroy(Sender: TObject);
   private
     FLotteries: TList<TLottery>;
+    FDraws: TList<TDraw>;
+    FPeriodFrom: TDate;
+    FPeriodTo: TDate;
   public
+    procedure SetPeriod(APeriodFrom, APeriodTo: TDate);
     function GetLotteries: TList<TLottery>;
+    function GetDraws(ALotteryId: Integer): TList<TDraw>;
+    procedure FreeAndClear<T: class>(List: TList<T>);
   end;
 
 var
@@ -33,6 +39,12 @@ implementation
 
 {$R *.dfm}
 
+procedure TDM.SetPeriod(APeriodFrom: TDate; APeriodTo: TDate);
+begin
+  FPeriodFrom := APeriodFrom;
+  FPeriodTo := APeriodTo;
+end;
+
 function TDM.GetLotteries: TList<TLottery>;
 begin
   FDQuerySelect.Close;
@@ -43,9 +55,7 @@ begin
     'ORDER BY l.lottery_name';
   FDQuerySelect.Open;
 
-  for var L in FLotteries do
-    L.Free;
-  FLotteries.Clear;
+  FreeAndClear<TLottery>(FLotteries);
 
   while not FDQuerySelect.Eof do
   begin
@@ -67,6 +77,37 @@ begin
   Result := FLotteries;
 end;
 
+function TDM.GetDraws(ALotteryId: Integer): TList<TDraw>;
+begin
+
+  FDQuerySelect.Close;
+  FDQuerySelect.SQL.Text := 'SELECT id, lottery_id, draw_date, main_numbers, extra_numbers ' +
+    'FROM draws WHERE lottery_id = :lottery_id AND draw_date BETWEEN :period_from AND :period_to ' +
+    'ORDER BY draw_date DESC';
+
+  FDQuerySelect.ParamByName('lottery_id').AsInteger := ALotteryId;
+  FDQuerySelect.ParamByName('period_from').AsDate := FPeriodFrom;
+  FDQuerySelect.ParamByName('period_to').AsDate := FPeriodTo;
+
+  FDQuerySelect.Open;
+
+  FreeAndClear<TDraw>(FDraws);
+
+  while not FDQuerySelect.Eof do
+  begin
+    FDraws.Add(TDraw.Create(
+      FDQuerySelect.FieldByName('id').AsInteger,
+      FDQuerySelect.FieldByName('lottery_id').AsInteger,
+      FDQuerySelect.FieldByName('draw_date').AsDateTime,
+      FDQuerySelect.FieldByName('main_numbers').AsString,
+      FDQuerySelect.FieldByName('extra_numbers').AsString
+    ));
+    FDQuerySelect.Next;
+  end;
+
+  Result := FDraws;
+end;
+
 procedure TDM.DataModuleCreate(Sender: TObject);
 begin
   // Developer mode
@@ -75,6 +116,7 @@ begin
   FDConnection.Params.Add('Database=' + ExtractFilePath(ParamStr(0)) + 'data\LOTTOMETRICS.FDB');
 
   FLotteries := TList<TLottery>.Create;
+  FDraws := TList<TDraw>.Create;
 
   try
     FDConnection.Connected := True;
@@ -89,13 +131,20 @@ begin
   if FDConnection.Connected then
     FDConnection.Connected := False;
 
-  if Assigned(FLotteries) then
-  begin
-    for var L in FLotteries do
-      L.Free;
-    FLotteries.Clear;
-  end;
+  FreeAndClear<TLottery>(FLotteries);
+  FreeAndClear<TDraw>(FDraws);
+end;
 
+procedure TDM.FreeAndClear<T>(List: TList<T>);
+var
+  Item: T;
+begin
+  if Assigned(List) then
+  begin
+    for Item in List do
+      Item.Free;
+    List.Clear;
+  end;
 end;
 
 end.

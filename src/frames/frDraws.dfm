@@ -8,6 +8,7 @@ object frmDraws: TfrmDraws
   Margins.Top = 0
   Margins.Right = 0
   Margins.Bottom = 0
+  Align = alClient
   Color = clWindow
   ParentBackground = False
   ParentColor = False
@@ -27,10 +28,6 @@ object frmDraws: TfrmDraws
     Color = clWindow
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 0
-    ExplicitTop = 0
-    ExplicitWidth = 640
-    ExplicitHeight = 480
     object lblTitle: TLabel
       AlignWithMargins = True
       Left = 3
@@ -45,26 +42,54 @@ object frmDraws: TfrmDraws
       Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitLeft = 4
-      ExplicitTop = 4
       ExplicitWidth = 98
     end
-    object sbDraws: TScrollBox
+    object drgDraws: TDrawGrid
       AlignWithMargins = True
       Left = 3
-      Top = 71
+      Top = 81
       Width = 584
-      Height = 366
-      Margins.Top = 20
+      Height = 315
+      Margins.Top = 30
       Align = alClient
       BevelInner = bvNone
       BevelOuter = bvNone
-      BorderStyle = bsNone
+      Ctl3D = False
+      DefaultColWidth = 45
+      DefaultRowHeight = 45
+      FixedCols = 0
+      FixedRows = 0
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goFixedRowDefAlign]
+      ParentCtl3D = False
       TabOrder = 0
-      ExplicitLeft = 4
-      ExplicitTop = 248
-      ExplicitWidth = 632
-      ExplicitHeight = 228
+      OnDrawCell = drgDrawsDrawCell
+      ExplicitHeight = 296
+    end
+    object pnlButtons: TPanel
+      Left = 0
+      Top = 399
+      Width = 590
+      Height = 41
+      Align = alBottom
+      BevelOuter = bvNone
+      Color = clWindow
+      ParentBackground = False
+      TabOrder = 1
+      ExplicitLeft = 104
+      ExplicitTop = 400
+      ExplicitWidth = 185
+      object btnAdd: TButton
+        AlignWithMargins = True
+        Left = 1
+        Top = 3
+        Width = 100
+        Height = 35
+        Margins.Left = 1
+        Align = alLeft
+        Caption = #1057#1086#1079#1076#1072#1090#1100
+        TabOrder = 0
+        ExplicitLeft = 3
+      end
     end
   end
 end

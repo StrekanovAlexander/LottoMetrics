@@ -23,6 +23,7 @@ type
     btnStatsNumbers: TButton;
     procedure FormCreate(Sender: TObject);
     procedure cbxLotteriesChange(Sender: TObject);
+    procedure dtpPeriodFromCloseUp(Sender: TObject);
   private
     FLottery: TLottery;
     FFrameDraws: TfrmDraws;
@@ -90,8 +91,9 @@ begin
   end;
 
   GetDefaultPeriod(StartDate, EndDate);
+  DM.SetPeriod(StartDate, EndDate);
   dtpPeriodFrom.Date := StartDate;
-  dtpPeriodTo.Date   := EndDate;
+  dtpPeriodTo.Date := EndDate;
 
   if Assigned(FFrameDraws) then
     FreeAndNil(FFrameDraws);
@@ -100,9 +102,7 @@ begin
   with FFrameDraws do
   begin
     Parent := pnlMain;
-    Align := alClient;
-    lblTitle.Caption := 'Результаты розыгрышей';
-    RenderDraws;
+    SetDraws(FLottery);
   end;
 
 end;
@@ -110,6 +110,22 @@ end;
 procedure TfmMain.cbxLotteriesChange(Sender: TObject);
 begin
   UpdateSelectedLottery;
+end;
+
+procedure TfmMain.dtpPeriodFromCloseUp(Sender: TObject);
+begin
+  if dtpPeriodFrom.Date <= dtpPeriodTo.Date then
+  begin
+    DM.SetPeriod(dtpPeriodFrom.Date, dtpPeriodTo.Date);
+    if Assigned(FFrameDraws) then
+      FreeAndNil(FFrameDraws);
+    FFrameDraws := TfrmDraws.Create(Self);
+    with FFrameDraws do
+    begin
+      Parent := pnlMain;
+      SetDraws(FLottery);
+    end;
+  end;
 end;
 
 procedure TfmMain.FormCreate(Sender: TObject);

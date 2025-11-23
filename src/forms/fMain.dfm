@@ -42,7 +42,6 @@ object fmMain: TfmMain
       Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitTop = 30
       ExplicitWidth = 144
     end
     object lblPeriod: TLabel
@@ -54,7 +53,6 @@ object fmMain: TfmMain
       Margins.Top = 15
       Align = alTop
       Caption = #1055#1077#1088#1080#1086#1076
-      ExplicitTop = 126
       ExplicitWidth = 42
     end
     object lblAnalytics: TLabel
@@ -66,7 +64,6 @@ object fmMain: TfmMain
       Margins.Top = 25
       Align = alTop
       Caption = #1040#1085#1072#1083#1080#1090#1080#1082#1072
-      ExplicitTop = 287
       ExplicitWidth = 59
     end
     object cbxLotteries: TComboBox
@@ -80,7 +77,6 @@ object fmMain: TfmMain
       Style = csDropDownList
       TabOrder = 0
       OnChange = cbxLotteriesChange
-      ExplicitTop = 85
     end
     object dtpPeriodFrom: TDateTimePicker
       AlignWithMargins = True
@@ -93,7 +89,7 @@ object fmMain: TfmMain
       Format = 'dd.MM.yyyy'
       Time = 0.483649108798999800
       TabOrder = 1
-      ExplicitTop = 147
+      OnCloseUp = dtpPeriodFromCloseUp
     end
     object dtpPeriodTo: TDateTimePicker
       AlignWithMargins = True
@@ -107,7 +103,7 @@ object fmMain: TfmMain
       Format = 'dd.MM.yyyy'
       Time = 0.485294745369174100
       TabOrder = 2
-      ExplicitTop = 178
+      OnCloseUp = dtpPeriodFromCloseUp
     end
     object btnDraws: TButton
       AlignWithMargins = True
@@ -119,7 +115,6 @@ object fmMain: TfmMain
       Align = alTop
       Caption = #1056#1086#1079#1099#1075#1088#1099#1096#1080
       TabOrder = 3
-      ExplicitTop = 219
     end
     object btnStatsNumbers: TButton
       AlignWithMargins = True
@@ -130,7 +125,6 @@ object fmMain: TfmMain
       Align = alTop
       Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072' '#1087#1086' '#1085#1086#1084#1077#1088#1072#1084
       TabOrder = 4
-      ExplicitTop = 308
     end
   end
   object pnlMain: TPanel
