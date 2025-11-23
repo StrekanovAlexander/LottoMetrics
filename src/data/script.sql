@@ -92,3 +92,75 @@ BEGIN
     END
   END
 END
+
+create or alter procedure add_draw_numbers (
+  p_draw_id integer)
+as
+declare variable v_main_numbers varchar(50);
+declare variable v_extra_numbers varchar(20);
+declare variable v_num varchar(5);
+declare variable v_pos integer;
+begin
+  SELECT main_numbers, extra_numbers
+  FROM draws
+  WHERE id = :p_draw_id
+  INTO :v_main_numbers, :v_extra_numbers;
+
+  WHILE (CHAR_LENGTH(:v_main_numbers) > 0) DO
+    BEGIN
+      v_pos = POSITION(',' IN :v_main_numbers);
+      IF (v_pos > 0) THEN
+      BEGIN
+        v_num = SUBSTRING(:v_main_numbers FROM 1 FOR v_pos-1);
+        v_main_numbers = SUBSTRING(:v_main_numbers FROM v_pos+1);
+      END
+      ELSE
+      BEGIN
+        v_num = :v_main_numbers;
+        v_main_numbers = '';
+      END
+
+      INSERT INTO draw_numbers(draw_id, number, number_kind)
+      VALUES (:p_draw_id, CAST(:v_num AS SMALLINT), 'main');
+    END
+
+    IF (:v_extra_numbers IS NOT NULL AND :v_extra_numbers <> '') THEN
+    BEGIN
+      INSERT INTO draw_numbers(draw_id, number, number_kind)
+      VALUES (:p_draw_id, CAST(:v_extra_numbers AS SMALLINT), 'extra');
+    END
+end
+
+create or alter procedure add_draw (
+    p_lottery_id integer,
+    p_draw_date date,
+    p_main_numbers varchar(50),
+    p_extra_numbers varchar(20))
+returns (
+    new_id integer)
+as
+begin
+  INSERT INTO DRAWS (LOTTERY_ID, DRAW_DATE, MAIN_NUMBERS, EXTRA_NUMBERS)
+  VALUES (:P_LOTTERY_ID, :P_DRAW_DATE, :P_MAIN_NUMBERS, :P_EXTRA_NUMBERS)
+  RETURNING ID INTO :NEW_ID;
+  execute procedure add_draw_numbers(:new_id);
+  suspend;
+end
+
+create or alter procedure update_draw (
+    p_draw_id integer,
+    p_draw_date date,
+    p_main_numbers varchar(50),
+    p_extra_numbers varchar(20))
+as
+begin
+  UPDATE DRAWS set
+    DRAW_DATE = :p_draw_date,
+    MAIN_NUMBERS = :p_main_numbers,
+    EXTRA_NUMBERS = :p_extra_numbers
+  WHERE
+    ID = :p_draw_id;
+
+  DELETE FROM DRAW_NUMBERS WHERE DRAW_ID = :p_draw_id;
+  execute procedure add_draw_numbers(:p_draw_id);
+end

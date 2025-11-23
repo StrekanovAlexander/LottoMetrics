@@ -16,6 +16,7 @@ type
     FDConnection: TFDConnection;
     FBDriverLink: TFDPhysFBDriverLink;
     FDQuerySelect: TFDQuery;
+    FDQueryExec: TFDQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
@@ -28,6 +29,10 @@ type
     function GetLotteries: TList<TLottery>;
     function GetDraws(ALotteryId: Integer): TList<TDraw>;
     procedure FreeAndClear<T: class>(List: TList<T>);
+    procedure AddDraw(ALotteryId: Integer; ADrawDate: TDateTime; const AMainNumbers: string;
+      const AExtraNumbers: string);
+    procedure UpdateDraw(ADrawId: Integer; ADrawDate: TDateTime; const AMainNumbers: string;
+      const AExtraNumbers: string);
   end;
 
 var
@@ -38,6 +43,28 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure TDM.AddDraw(ALotteryId: Integer; ADrawDate: TDateTime; const AMainNumbers: string;
+  const AExtraNumbers: string);
+begin
+  FDQueryExec.SQL.Text := 'EXECUTE PROCEDURE add_draw (:lottery_id, :draw_date, :main_numbers, :extra_numbers)';
+  FDQueryExec.ParamByName('lottery_id').AsInteger := ALotteryID;
+  FDQueryExec.ParamByName('draw_date').AsDate := ADrawDate;
+  FDQueryExec.ParamByName('main_numbers').AsString := AMainNumbers;
+  FDQueryExec.ParamByName('extra_numbers').AsString := AExtraNumbers;
+  FDQueryExec.Open;
+end;
+
+procedure TDM.UpdateDraw(ADrawId: Integer; ADrawDate: TDateTime; const AMainNumbers: string;
+  const AExtraNumbers: string);
+begin
+  FDQueryExec.SQL.Text := 'EXECUTE PROCEDURE update_draw (:draw_id, :draw_date, :main_numbers, :extra_numbers)';
+  FDQueryExec.ParamByName('draw_id').AsInteger := ADrawID;
+  FDQueryExec.ParamByName('draw_date').AsDate := ADrawDate;
+  FDQueryExec.ParamByName('main_numbers').AsString := AMainNumbers;
+  FDQueryExec.ParamByName('extra_numbers').AsString := AExtraNumbers;
+  FDQueryExec.ExecSQL;
+end;
 
 procedure TDM.SetPeriod(APeriodFrom: TDate; APeriodTo: TDate);
 begin
@@ -79,11 +106,10 @@ end;
 
 function TDM.GetDraws(ALotteryId: Integer): TList<TDraw>;
 begin
-
   FDQuerySelect.Close;
   FDQuerySelect.SQL.Text := 'SELECT id, lottery_id, draw_date, main_numbers, extra_numbers ' +
     'FROM draws WHERE lottery_id = :lottery_id AND draw_date BETWEEN :period_from AND :period_to ' +
-    'ORDER BY draw_date DESC';
+    'ORDER BY draw_date DESC, id DESC';
 
   FDQuerySelect.ParamByName('lottery_id').AsInteger := ALotteryId;
   FDQuerySelect.ParamByName('period_from').AsDate := FPeriodFrom;

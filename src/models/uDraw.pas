@@ -14,8 +14,9 @@ type TDraw = class
     function GetMainNumbersArr: TArray<Integer>;
     function GetExtraNumbersArr: TArray<Integer>;
   public
+    constructor Create; overload;
     constructor Create(AID: Integer; ALotteryId: Integer; ADrawDate: TDate;
-      AMainNumbers: string; AExtraNumbers: string);
+      AMainNumbers: string; AExtraNumbers: string); overload;
     property ID: Integer read FID;
     property LotteryId: Integer read FLotteryId;
     property DrawDate: TDate read FDrawDate;
@@ -26,6 +27,11 @@ type TDraw = class
 end;
 
 implementation
+
+constructor TDraw.Create;
+begin
+  inherited Create;
+end;
 
 constructor TDraw.Create(AID: Integer; ALotteryId: Integer; ADrawDate: TDate; AMainNumbers: string; AExtraNumbers: string);
 begin

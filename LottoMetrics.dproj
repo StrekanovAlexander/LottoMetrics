@@ -126,7 +126,7 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="src\forms\fMain.pas">
+        <DCCReference Include="src\forms\main\fMain.pas">
             <Form>fmMain</Form>
             <FormType>dfm</FormType>
         </DCCReference>
@@ -136,7 +136,7 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="src\models\uLottery.pas"/>
-        <DCCReference Include="src\frames\frDraws.pas">
+        <DCCReference Include="src\frames\draw\frDraws.pas">
             <Form>frmDraws</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
@@ -145,6 +145,12 @@
         <DCCReference Include="src\utils\uNumberUtils.pas"/>
         <DCCReference Include="src\utils\uDateUtils.pas"/>
         <DCCReference Include="src\ui\uGrids.pas"/>
+        <DCCReference Include="src\forms\draw\fDrawEdit.pas">
+            <Form>fmDrawEdit</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\utils\uValidators.pas"/>
+        <DCCReference Include="src\utils\uControls.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

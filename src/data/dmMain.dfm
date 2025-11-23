@@ -29,4 +29,9 @@ object DM: TDM
     Left = 32
     Top = 112
   end
+  object FDQueryExec: TFDQuery
+    Connection = FDConnection
+    Left = 32
+    Top = 192
+  end
 end
