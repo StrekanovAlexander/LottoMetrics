@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   System.Generics.Collections, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
   Vcl.ExtCtrls, Vcl.Grids,
-  dmMain, fDrawEdit, uDateUtils, uDraw, uGrids, uLottery;
+  dmMain, uTranslations,
+  fDrawEdit, uDateUtils, uDraw, uGrids, uLottery;
 
 type
   TfrmDraws = class(TFrame)
@@ -27,6 +28,7 @@ type
     FDraws: TList<TDraw>;
     function GetSelectedDraw: TDraw;
   public
+    procedure ApplyTranslations;
     procedure SetDraws(ALottery: TLottery);
   end;
 
@@ -34,11 +36,12 @@ implementation
 
 {$R *.dfm}
 
+
 procedure TfrmDraws.SetDraws(ALottery: TLottery);
 begin
   FLottery := ALottery;
   FDraws := DM.GetDraws(FLottery.ID);
-  lblTitle.Caption := 'Результаты розыгрышей "' + FLottery.ToString + '"';
+  ApplyTranslations;
 
   with drgDraws do
   begin
@@ -124,6 +127,13 @@ begin
     Result := FDraws[drgDraws.Row]
   else
     Result := nil;
+end;
+
+procedure TfrmDraws.ApplyTranslations;
+begin
+  lblTitle.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'DRAW_RESULTS');
+  btnAdd.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BTN_ADD');
+  btnEdit.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BTN_EDIT');
 end;
 
 end.

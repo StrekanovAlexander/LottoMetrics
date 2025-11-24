@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.StdCtrls,
-  dmMain, uControls, uValidators, uLottery, uDraw;
+  dmMain, uControls, uValidators, uLottery, uDraw, uTranslations;
 
 type
   TfmDrawEdit = class(TForm)
@@ -25,6 +25,7 @@ type
     FIsNew: Boolean;
     procedure Init;
     procedure BuildControls;
+    procedure ApplyTranslations;
   public
     constructor Create(AOwner: TComponent; ALottery: TLottery; ADraw: TDraw); reintroduce;
   end;
@@ -71,6 +72,7 @@ begin
   else
     FDraw := ADraw;
   Init;
+  ApplyTranslations;
 end;
 
 procedure TfmDrawEdit.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -81,15 +83,17 @@ end;
 procedure TfmDrawEdit.Init;
 begin
   if FIsNew then
-    Caption := 'Добавление данных розыгрыша'
+  begin
+    Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'DRAW_ADD');
+    dtpDate.Date := Now;
+  end
   else
-    begin
-      Caption := 'Редактирование розыгрыша';
-      dtpDate.Date := FDraw.DrawDate;
-    end;
+  begin
+    Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'DRAW_EDIT');
+    dtpDate.Date := FDraw.DrawDate;
+  end;
 
   pnlTitle.Caption := Caption;
-
   BuildControls;
 end;
 
@@ -149,6 +153,14 @@ begin
     posTop := posTop + marginTop;
   end;
 
+end;
+
+procedure TfmDrawEdit.ApplyTranslations;
+begin
+  gbxMainNumbers.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'MAIN_NUMBERS');
+  gbxExtraNumbers.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'EXTRA_NUMBERS');
+  btnOK.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BTN_OK');
+  btnCancel.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BTN_CANCEL');
 end;
 
 end.

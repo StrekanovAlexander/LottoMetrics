@@ -151,6 +151,11 @@
         </DCCReference>
         <DCCReference Include="src\utils\uValidators.pas"/>
         <DCCReference Include="src\utils\uControls.pas"/>
+        <DCCReference Include="src\models\uLanguage.pas"/>
+        <DCCReference Include="src\data\uLanguageRepo.pas"/>
+        <DCCReference Include="src\data\uLotteryRepo.pas"/>
+        <DCCReference Include="src\data\uDrawRepo.pas"/>
+        <DCCReference Include="src\models\uTranslations.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

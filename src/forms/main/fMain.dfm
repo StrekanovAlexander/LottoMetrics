@@ -2,7 +2,7 @@ object fmMain: TfmMain
   Left = 0
   Top = 0
   Caption = 'LottoMetrics'
-  ClientHeight = 441
+  ClientHeight = 572
   ClientWidth = 624
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11,12 +11,13 @@ object fmMain: TfmMain
   Font.Name = 'Segoe UI'
   Font.Style = []
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   TextHeight = 15
   object pnlLeft: TPanel
     Left = 0
     Top = 0
     Width = 250
-    Height = 441
+    Height = 572
     Margins.Bottom = 5
     Align = alLeft
     BevelOuter = bvNone
@@ -66,7 +67,17 @@ object fmMain: TfmMain
       Caption = #1040#1085#1072#1083#1080#1090#1080#1082#1072
       ExplicitWidth = 59
     end
-    object cbxLotteries: TComboBox
+    object lblLanguage: TLabel
+      AlignWithMargins = True
+      Left = 23
+      Top = 505
+      Width = 204
+      Height = 15
+      Align = alBottom
+      Caption = 'Language'
+      ExplicitWidth = 52
+    end
+    object cmbLotteries: TComboBox
       AlignWithMargins = True
       Left = 23
       Top = 103
@@ -76,7 +87,7 @@ object fmMain: TfmMain
       Align = alTop
       Style = csDropDownList
       TabOrder = 0
-      OnChange = cbxLotteriesChange
+      OnChange = cmbLotteriesChange
     end
     object dtpPeriodFrom: TDateTimePicker
       AlignWithMargins = True
@@ -126,12 +137,23 @@ object fmMain: TfmMain
       Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072' '#1087#1086' '#1085#1086#1084#1077#1088#1072#1084
       TabOrder = 4
     end
+    object cmbLanguages: TComboBox
+      AlignWithMargins = True
+      Left = 23
+      Top = 526
+      Width = 204
+      Height = 23
+      Align = alBottom
+      Style = csDropDownList
+      TabOrder = 5
+      OnChange = cmbLanguagesChange
+    end
   end
   object pnlMain: TPanel
     Left = 250
     Top = 0
     Width = 374
-    Height = 441
+    Height = 572
     Align = alClient
     TabOrder = 1
   end
