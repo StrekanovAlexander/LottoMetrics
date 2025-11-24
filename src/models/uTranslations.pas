@@ -33,6 +33,7 @@ begin
   LangDict.Add('DRAW_EDIT', 'Edit draw data');
   LangDict.Add('DRAW_RESULTS', 'Draw results');
   LangDict.Add('EXTRA_NUMBERS', 'Extra numbers');
+  LangDict.Add('FREQUENCY_ANALYSIS', 'Frequency analysis');
   LangDict.Add('LANG', 'Language');
   LangDict.Add('MAIN_NUMBERS', 'Main numbers');
   LangDict.Add('NUMBER_STATISTICS', 'Number Statistics');
@@ -51,6 +52,7 @@ begin
   LangDict.Add('DRAW_EDIT', 'Bearbeiten von Ziehungsdaten');
   LangDict.Add('DRAW_RESULTS', 'Ziehungsergebnisse');
   LangDict.Add('EXTRA_NUMBERS', 'Zusatzzahlen');
+  LangDict.Add('FREQUENCY_ANALYSIS', 'Häufigkeitsanalyse');
   LangDict.Add('LANG', 'Sprache');
   LangDict.Add('MAIN_NUMBERS', 'Hauptzahlen');
   LangDict.Add('NUMBER_STATISTICS', 'Zahlenstatistik');
@@ -69,6 +71,7 @@ begin
   LangDict.Add('DRAW_EDIT', 'Редактирование данных розыгрыша');
   LangDict.Add('DRAW_RESULTS', 'Результаты розыгрышей');
   LangDict.Add('EXTRA_NUMBERS', 'Дополнительные номера');
+  LangDict.Add('FREQUENCY_ANALYSIS', 'Частотный анализ');
   LangDict.Add('LANG', 'Язык');
   LangDict.Add('MAIN_NUMBERS', 'Основные номера');
   LangDict.Add('NUMBER_STATISTICS', 'Статистика по номерам');

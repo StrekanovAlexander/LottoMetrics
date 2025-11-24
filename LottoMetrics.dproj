@@ -136,11 +136,6 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="src\models\uLottery.pas"/>
-        <DCCReference Include="src\frames\draw\frDraws.pas">
-            <Form>frmDraws</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
         <DCCReference Include="src\models\uDraw.pas"/>
         <DCCReference Include="src\utils\uNumberUtils.pas"/>
         <DCCReference Include="src\utils\uDateUtils.pas"/>
@@ -156,6 +151,17 @@
         <DCCReference Include="src\data\uLotteryRepo.pas"/>
         <DCCReference Include="src\data\uDrawRepo.pas"/>
         <DCCReference Include="src\models\uTranslations.pas"/>
+        <DCCReference Include="src\frames\frBase.pas"/>
+        <DCCReference Include="src\frames\frFrequency.pas">
+            <Form>frmFrequency</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="src\frames\frDraws.pas">
+            <Form>frmDraws</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

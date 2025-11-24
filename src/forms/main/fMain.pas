@@ -6,12 +6,14 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, System.Generics.Collections,
   Vcl.ComCtrls,
-  dmMain, uDateUtils, uTranslations,
-  frDraws, uLanguage, uLottery
-//  uLang,
-  ;
+  dmMain,
+  frBase, frDraws, frFrequency,
+  uDateUtils, uTranslations,
+  uLanguage, uLottery;
 
 type
+  TfrmBaseClass = class of TfrmBase;
+
   TfmMain = class(TForm)
     pnlLeft: TPanel;
     pnlMain: TPanel;
@@ -22,7 +24,7 @@ type
     dtpPeriodTo: TDateTimePicker;
     btnDraws: TButton;
     lblAnalytics: TLabel;
-    btnStatsNumbers: TButton;
+    btnFrequency: TButton;
     cmbLanguages: TComboBox;
     lblLanguage: TLabel;
     procedure FormCreate(Sender: TObject);
@@ -30,19 +32,21 @@ type
     procedure SetLotteries;
     procedure SetPeriod;
 
+    procedure btnDrawsClick(Sender: TObject);
+    procedure btnFrequencyClick(Sender: TObject);
+
     procedure cmbLanguagesChange(Sender: TObject);
     procedure cmbLotteriesChange(Sender: TObject);
     procedure dtpPeriodFromCloseUp(Sender: TObject);
 
     procedure FormDestroy(Sender: TObject);
   private
-    FFrameDraws: TfrmDraws;
+    FCurrentFrame: TfrmBase;
     FLottery: TLottery;
     procedure ApplyTranslations;
-    procedure SetFrameDraws;
+    procedure SetFrame(AFrameClass: TfrmBaseClass);
     procedure UpdateSelectedLottery;
   public
-
   end;
 
 var
@@ -60,7 +64,7 @@ begin
   SetLanguages;
   SetLotteries;
   SetPeriod;
-  SetFrameDraws;
+  SetFrame(TfrmDraws);
   ApplyTranslations;
 end;
 
@@ -117,7 +121,7 @@ begin
   DM.SetCurrentLanguage(SelectedLang);
 
   ApplyTranslations;
-  FFrameDraws.ApplyTranslations;
+  FCurrentFrame.ApplyLanguage;
 end;
 
 // Lotteries
@@ -158,21 +162,28 @@ begin
   if dtpPeriodFrom.Date <= dtpPeriodTo.Date then
   begin
     DM.SetPeriod(dtpPeriodFrom.Date, dtpPeriodTo.Date);
-    SetFrameDraws;
+    SetFrame(TfrmDraws);
   end;
 end;
 
-// FrameDraws
-procedure TfmMain.SetFrameDraws;
+// Frames
+procedure TfmMain.SetFrame(AFrameClass: TfrmBaseClass);
 begin
-  if Assigned(FFrameDraws) then
-    FreeAndNil(FFrameDraws);
-  FFrameDraws := TfrmDraws.Create(Self);
-  with FFrameDraws do
-  begin
-    Parent := pnlMain;
-    SetDraws(FLottery);
-  end;
+  FreeAndNil(FCurrentFrame);
+  FCurrentFrame := AFrameClass.Create(Self);
+  FCurrentFrame.Parent := pnlMain;
+  if Assigned(FLottery) then
+    FCurrentFrame.SetData(FLottery);
+end;
+
+procedure TfmMain.btnDrawsClick(Sender: TObject);
+begin
+  SetFrame(TfrmDraws);
+end;
+
+procedure TfmMain.btnFrequencyClick(Sender: TObject);
+begin
+  SetFrame(TfrmFrequency);
 end;
 
 // Translations
@@ -186,12 +197,14 @@ begin
   lblLanguage.Caption := TTranslations.GetText(IsoCode, 'LANG');
 
   btnDraws.Caption := TTranslations.GetText(IsoCode, 'DRAWS');
-  btnStatsNumbers.Caption := TTranslations.GetText(IsoCode, 'NUMBER_STATISTICS');
+  btnFrequency.Caption := TTranslations.GetText(IsoCode, 'FREQUENCY_ANALYSIS');
 end;
 
 // Destroy
 procedure TfmMain.FormDestroy(Sender: TObject);
 begin
+  FreeAndNil(FCurrentFrame);
+
   for var i := 0 to cmbLotteries.Items.Count - 1 do
     TObject(cmbLotteries.Items.Objects[i]).Free;
   for var i := 0 to cmbLanguages.Items.Count - 1 do

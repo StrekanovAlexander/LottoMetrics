@@ -53,8 +53,8 @@ object fmMain: TfmMain
       Height = 15
       Margins.Top = 15
       Align = alTop
-      Caption = #1055#1077#1088#1080#1086#1076
-      ExplicitWidth = 42
+      Caption = 'Period'
+      ExplicitWidth = 34
     end
     object lblAnalytics: TLabel
       AlignWithMargins = True
@@ -64,8 +64,8 @@ object fmMain: TfmMain
       Height = 15
       Margins.Top = 25
       Align = alTop
-      Caption = #1040#1085#1072#1083#1080#1090#1080#1082#1072
-      ExplicitWidth = 59
+      Caption = 'Analytics'
+      ExplicitWidth = 48
     end
     object lblLanguage: TLabel
       AlignWithMargins = True
@@ -124,18 +124,20 @@ object fmMain: TfmMain
       Height = 40
       Margins.Top = 15
       Align = alTop
-      Caption = #1056#1086#1079#1099#1075#1088#1099#1096#1080
+      Caption = 'Draws'
       TabOrder = 3
+      OnClick = btnDrawsClick
     end
-    object btnStatsNumbers: TButton
+    object btnFrequency: TButton
       AlignWithMargins = True
       Left = 23
       Top = 326
       Width = 204
       Height = 40
       Align = alTop
-      Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072' '#1087#1086' '#1085#1086#1084#1077#1088#1072#1084
+      Caption = 'Frequency'
       TabOrder = 4
+      OnClick = btnFrequencyClick
     end
     object cmbLanguages: TComboBox
       AlignWithMargins = True

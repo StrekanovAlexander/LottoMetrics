@@ -1,0 +1,95 @@
+object frmDraws: TfrmDraws
+  Left = 0
+  Top = 0
+  Width = 640
+  Height = 480
+  Align = alClient
+  TabOrder = 0
+  object pnlContainer: TPanel
+    AlignWithMargins = True
+    Left = 25
+    Top = 20
+    Width = 590
+    Height = 440
+    Margins.Left = 25
+    Margins.Top = 20
+    Margins.Right = 25
+    Margins.Bottom = 20
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 0
+    ExplicitLeft = 240
+    ExplicitTop = 224
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object lblTitle: TLabel
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 584
+      Height = 15
+      Align = alTop
+      Caption = 'lblTitle'
+      ExplicitLeft = 1
+      ExplicitTop = 1
+      ExplicitWidth = 35
+    end
+    object drgDraws: TDrawGrid
+      AlignWithMargins = True
+      Left = 3
+      Top = 24
+      Width = 584
+      Height = 372
+      Align = alClient
+      Ctl3D = False
+      DefaultColWidth = 45
+      DefaultRowHeight = 45
+      FixedCols = 0
+      FixedRows = 0
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goFixedRowDefAlign]
+      ParentCtl3D = False
+      TabOrder = 0
+      OnDrawCell = drgDrawsDrawCell
+      OnSelectCell = drgDrawsSelectCell
+      ExplicitLeft = 0
+      ExplicitTop = 21
+      ExplicitWidth = 590
+      ExplicitHeight = 267
+    end
+    object pnlButtons: TPanel
+      Left = 0
+      Top = 399
+      Width = 590
+      Height = 41
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 1
+      ExplicitLeft = 192
+      ExplicitTop = 368
+      ExplicitWidth = 185
+      object btnAdd: TButton
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 100
+        Height = 35
+        Align = alLeft
+        Caption = 'btnAdd'
+        TabOrder = 0
+        OnClick = btnAddClick
+      end
+      object btnEdit: TButton
+        AlignWithMargins = True
+        Left = 109
+        Top = 3
+        Width = 100
+        Height = 35
+        Align = alLeft
+        Caption = 'btnEdit'
+        Enabled = False
+        TabOrder = 1
+        OnClick = btnEditClick
+      end
+    end
+  end
+end
