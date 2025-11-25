@@ -3,34 +3,116 @@ object frmFrequency: TfrmFrequency
   Top = 0
   Width = 640
   Height = 480
-  Align = alClient
   TabOrder = 0
   object pnlContainer: TPanel
     AlignWithMargins = True
-    Left = 25
-    Top = 20
-    Width = 590
-    Height = 440
-    Margins.Left = 25
-    Margins.Top = 20
-    Margins.Right = 25
-    Margins.Bottom = 20
+    Left = 10
+    Top = 10
+    Width = 620
+    Height = 460
+    Margins.Left = 10
+    Margins.Top = 10
+    Margins.Right = 10
+    Margins.Bottom = 10
     Align = alClient
+    BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = 280
-    ExplicitTop = 224
+    ExplicitLeft = 216
+    ExplicitTop = 168
     ExplicitWidth = 185
     ExplicitHeight = 41
     object lblTitle: TLabel
-      Left = 1
-      Top = 1
-      Width = 588
-      Height = 15
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 614
+      Height = 21
       Align = alTop
       Caption = 'lblTitle'
-      ExplicitLeft = 48
-      ExplicitTop = 80
-      ExplicitWidth = 35
+      Font.Charset = RUSSIAN_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ExplicitWidth = 50
+    end
+    object pnlModes: TPanel
+      AlignWithMargins = True
+      Left = 3
+      Top = 32
+      Width = 614
+      Height = 41
+      Margins.Top = 5
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 0
+      ExplicitLeft = 208
+      ExplicitTop = 120
+      ExplicitWidth = 185
+      object btnOverall: TSpeedButton
+        AlignWithMargins = True
+        Left = 0
+        Top = 3
+        Width = 100
+        Height = 35
+        Margins.Left = 0
+        Align = alLeft
+        Caption = 'btnOverall'
+        ExplicitLeft = 3
+      end
+      object btnGaps: TSpeedButton
+        AlignWithMargins = True
+        Left = 237
+        Top = 3
+        Width = 100
+        Height = 35
+        Align = alLeft
+        Caption = 'btnGaps'
+        ExplicitLeft = 215
+      end
+      object btnPairs: TSpeedButton
+        AlignWithMargins = True
+        Left = 106
+        Top = 3
+        Width = 125
+        Height = 35
+        Align = alLeft
+        Caption = 'btnPairs'
+      end
+      object btnExtra: TSpeedButton
+        AlignWithMargins = True
+        Left = 343
+        Top = 3
+        Width = 125
+        Height = 35
+        Align = alLeft
+        Caption = 'btnExtra'
+        ExplicitLeft = 318
+      end
+    end
+    object grdData: TDrawGrid
+      AlignWithMargins = True
+      Left = 3
+      Top = 86
+      Width = 614
+      Height = 371
+      Margins.Top = 10
+      Align = alClient
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      ColCount = 2
+      Ctl3D = False
+      DefaultColWidth = 35
+      DefaultRowHeight = 35
+      FixedCols = 0
+      RowCount = 2
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goFixedRowDefAlign]
+      ParentCtl3D = False
+      TabOrder = 1
+      OnDrawCell = grdDataDrawCell
+      ExplicitTop = 37
+      ExplicitHeight = 379
     end
   end
 end

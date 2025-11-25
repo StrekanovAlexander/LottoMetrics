@@ -8,7 +8,7 @@ uses
   dmMain, uControls, uValidators, uLottery, uDraw, uTranslations;
 
 type
-  TfmDrawEdit = class(TForm)
+  TfmDrawEdit = class(TForm, ITranslatable)
     pnlTitle: TPanel;
     pnlButtons: TPanel;
     dtpDate: TDateTimePicker;
@@ -25,7 +25,7 @@ type
     FIsNew: Boolean;
     procedure Init;
     procedure BuildControls;
-    procedure ApplyTranslations;
+    procedure ApplyLanguage;
   public
     constructor Create(AOwner: TComponent; ALottery: TLottery; ADraw: TDraw); reintroduce;
   end;
@@ -72,7 +72,7 @@ begin
   else
     FDraw := ADraw;
   Init;
-  ApplyTranslations;
+  ApplyLanguage;
 end;
 
 procedure TfmDrawEdit.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -155,7 +155,7 @@ begin
 
 end;
 
-procedure TfmDrawEdit.ApplyTranslations;
+procedure TfmDrawEdit.ApplyLanguage;
 begin
   gbxMainNumbers.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'MAIN_NUMBERS');
   gbxExtraNumbers.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'EXTRA_NUMBERS');

@@ -5,16 +5,15 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, System.Generics.Collections,
-  Vcl.ComCtrls,
+  Vcl.ComCtrls, System.Rtti,
   dmMain,
-  frBase, frDraws, frFrequency,
-  uDateUtils, uTranslations,
-  uLanguage, uLottery;
+  uDateUtils, uTranslations, uLanguage, uLottery,
+  frDraws, frFrequency;
 
 type
-  TfrmBaseClass = class of TfrmBase;
+  TFrameClass = class of TFrame;
 
-  TfmMain = class(TForm)
+  TfmMain = class(TForm, ITranslatable)
     pnlLeft: TPanel;
     pnlMain: TPanel;
     lblLotteryName: TLabel;
@@ -27,24 +26,23 @@ type
     btnFrequency: TButton;
     cmbLanguages: TComboBox;
     lblLanguage: TLabel;
+    bvlMain: TBevel;
     procedure FormCreate(Sender: TObject);
     procedure SetLanguages;
     procedure SetLotteries;
     procedure SetPeriod;
-
-    procedure btnDrawsClick(Sender: TObject);
-    procedure btnFrequencyClick(Sender: TObject);
-
     procedure cmbLanguagesChange(Sender: TObject);
     procedure cmbLotteriesChange(Sender: TObject);
     procedure dtpPeriodFromCloseUp(Sender: TObject);
 
     procedure FormDestroy(Sender: TObject);
+    procedure btnDrawsClick(Sender: TObject);
+    procedure btnFrequencyClick(Sender: TObject);
   private
-    FCurrentFrame: TfrmBase;
+    FCurrentFrame: TFrame;
     FLottery: TLottery;
-    procedure ApplyTranslations;
-    procedure SetFrame(AFrameClass: TfrmBaseClass);
+    procedure ApplyLanguage;
+    procedure SetFrame(AFrameClass: TFrameClass);
     procedure UpdateSelectedLottery;
   public
   end;
@@ -56,16 +54,35 @@ implementation
 
 {$R *.dfm}
 
+procedure TfmMain.SetFrame(AFrameClass: TFrameClass);
+var
+  ctx: TRttiContext;
+  rttiType: TRttiType;
+  rttiMethod: TRttiMethod;
+begin
+  FreeAndNil(FCurrentFrame);
+
+  FCurrentFrame := AFrameClass.Create(Self);
+  FCurrentFrame.Parent := pnlMain;
+  FCurrentFrame.Align := alClient;
+
+  ctx := TRttiContext.Create;
+  rttiType := ctx.GetType(FCurrentFrame.ClassType);
+  rttiMethod := rttiType.GetMethod('SetData');
+
+  if Assigned(rttiMethod) then
+    rttiMethod.Invoke(FCurrentFrame, [FLottery]);
+
+end;
+
 procedure TfmMain.FormCreate(Sender: TObject);
 begin
-  Width := 1200;
-  Height := 800;
   Position := poScreenCenter;
   SetLanguages;
   SetLotteries;
   SetPeriod;
   SetFrame(TfrmDraws);
-  ApplyTranslations;
+  Self.ApplyLanguage;
 end;
 
 procedure TfmMain.UpdateSelectedLottery;
@@ -108,10 +125,21 @@ begin
   end;
 end;
 
+procedure TfmMain.btnDrawsClick(Sender: TObject);
+begin
+  SetFrame(TfrmDraws);
+end;
+
+procedure TfmMain.btnFrequencyClick(Sender: TObject);
+begin
+   SetFrame(TfrmFrequency);
+end;
+
 procedure TfmMain.cmbLanguagesChange(Sender: TObject);
 var
   SelectedLang: TLanguage;
   SelectedID: Integer;
+  Translatable: ITranslatable;
 begin
   if cmbLanguages.ItemIndex < 0 then Exit;
 
@@ -120,8 +148,10 @@ begin
   DM.UpdateDefaultLanguage(SelectedID);
   DM.SetCurrentLanguage(SelectedLang);
 
-  ApplyTranslations;
-  FCurrentFrame.ApplyLanguage;
+  Self.ApplyLanguage;
+   if Supports(FCurrentFrame, ITranslatable, Translatable) then
+    Translatable.ApplyLanguage;
+
 end;
 
 // Lotteries
@@ -162,40 +192,19 @@ begin
   if dtpPeriodFrom.Date <= dtpPeriodTo.Date then
   begin
     DM.SetPeriod(dtpPeriodFrom.Date, dtpPeriodTo.Date);
-    SetFrame(TfrmDraws);
+    if FCurrentFrame is TfrmDraws then
+      SetFrame(TfrmDraws);
   end;
 end;
 
-// Frames
-procedure TfmMain.SetFrame(AFrameClass: TfrmBaseClass);
-begin
-  FreeAndNil(FCurrentFrame);
-  FCurrentFrame := AFrameClass.Create(Self);
-  FCurrentFrame.Parent := pnlMain;
-  if Assigned(FLottery) then
-    FCurrentFrame.SetData(FLottery);
-end;
-
-procedure TfmMain.btnDrawsClick(Sender: TObject);
-begin
-  SetFrame(TfrmDraws);
-end;
-
-procedure TfmMain.btnFrequencyClick(Sender: TObject);
-begin
-  SetFrame(TfrmFrequency);
-end;
-
 // Translations
-procedure TfmMain.ApplyTranslations;
+procedure TfmMain.ApplyLanguage;
 var IsoCode: string;
 begin
   IsoCode := DM.CurrentLanguage.IsoCode;
-
   lblPeriod.Caption := TTranslations.GetText(IsoCode, 'PERIOD');
   lblAnalytics.Caption := TTranslations.GetText(IsoCode, 'ANALYTICS');
   lblLanguage.Caption := TTranslations.GetText(IsoCode, 'LANG');
-
   btnDraws.Caption := TTranslations.GetText(IsoCode, 'DRAWS');
   btnFrequency.Caption := TTranslations.GetText(IsoCode, 'FREQUENCY_ANALYSIS');
 end;
@@ -203,8 +212,6 @@ end;
 // Destroy
 procedure TfmMain.FormDestroy(Sender: TObject);
 begin
-  FreeAndNil(FCurrentFrame);
-
   for var i := 0 to cmbLotteries.Items.Count - 1 do
     TObject(cmbLotteries.Items.Objects[i]).Free;
   for var i := 0 to cmbLanguages.Items.Count - 1 do

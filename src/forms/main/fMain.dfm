@@ -1,9 +1,11 @@
 object fmMain: TfmMain
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'LottoMetrics'
-  ClientHeight = 572
-  ClientWidth = 624
+  ClientHeight = 561
+  ClientWidth = 784
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,87 +15,98 @@ object fmMain: TfmMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   TextHeight = 15
+  object bvlMain: TBevel
+    Left = 200
+    Top = 0
+    Width = 3
+    Height = 561
+    Align = alLeft
+    Shape = bsLeftLine
+    Style = bsRaised
+  end
   object pnlLeft: TPanel
     Left = 0
     Top = 0
-    Width = 250
-    Height = 572
+    Width = 200
+    Height = 561
     Margins.Bottom = 5
     Align = alLeft
     BevelOuter = bvNone
-    BorderWidth = 20
-    Color = clWhitesmoke
+    BorderWidth = 10
     Ctl3D = True
     ParentBackground = False
     ParentCtl3D = False
     TabOrder = 0
+    ExplicitHeight = 441
     object lblLotteryName: TLabel
       AlignWithMargins = True
-      Left = 23
-      Top = 33
-      Width = 192
-      Height = 32
-      Margins.Top = 13
-      Margins.Right = 15
+      Left = 13
+      Top = 13
+      Width = 174
+      Height = 21
       Align = alTop
       Caption = 'LotteryName'
-      Font.Charset = RUSSIAN_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -24
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlue
+      Font.Height = -16
       Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentFont = False
-      ExplicitWidth = 144
+      ExplicitWidth = 97
     end
     object lblPeriod: TLabel
       AlignWithMargins = True
-      Left = 23
-      Top = 144
-      Width = 204
+      Left = 13
+      Top = 88
+      Width = 174
       Height = 15
       Margins.Top = 15
       Align = alTop
-      Caption = 'Period'
-      ExplicitWidth = 34
+      Caption = 'lblPeriod'
+      ExplicitWidth = 47
     end
     object lblAnalytics: TLabel
       AlignWithMargins = True
-      Left = 23
-      Top = 305
-      Width = 204
+      Left = 13
+      Top = 229
+      Width = 174
       Height = 15
-      Margins.Top = 25
+      Margins.Top = 15
       Align = alTop
-      Caption = 'Analytics'
-      ExplicitWidth = 48
+      Caption = 'lblAnalytics'
+      ExplicitTop = 249
+      ExplicitWidth = 61
     end
     object lblLanguage: TLabel
       AlignWithMargins = True
-      Left = 23
-      Top = 505
-      Width = 204
+      Left = 13
+      Top = 504
+      Width = 174
       Height = 15
       Align = alBottom
       Caption = 'Language'
+      ExplicitLeft = 23
+      ExplicitTop = 505
       ExplicitWidth = 52
     end
     object cmbLotteries: TComboBox
       AlignWithMargins = True
-      Left = 23
-      Top = 103
-      Width = 204
+      Left = 13
+      Top = 47
+      Width = 174
       Height = 23
-      Margins.Top = 35
+      Margins.Top = 10
       Align = alTop
-      Style = csDropDownList
+      ExtendedUI = True
       TabOrder = 0
       OnChange = cmbLotteriesChange
+      ExplicitTop = 72
     end
     object dtpPeriodFrom: TDateTimePicker
       AlignWithMargins = True
-      Left = 23
-      Top = 165
-      Width = 204
+      Left = 13
+      Top = 109
+      Width = 174
       Height = 23
       Align = alTop
       Date = 45983.000000000000000000
@@ -101,12 +114,15 @@ object fmMain: TfmMain
       Time = 0.483649108798999800
       TabOrder = 1
       OnCloseUp = dtpPeriodFromCloseUp
+      ExplicitLeft = 23
+      ExplicitTop = 165
+      ExplicitWidth = 204
     end
     object dtpPeriodTo: TDateTimePicker
       AlignWithMargins = True
-      Left = 23
-      Top = 196
-      Width = 204
+      Left = 13
+      Top = 140
+      Width = 174
       Height = 23
       Margins.Top = 5
       Align = alTop
@@ -115,48 +131,58 @@ object fmMain: TfmMain
       Time = 0.485294745369174100
       TabOrder = 2
       OnCloseUp = dtpPeriodFromCloseUp
+      ExplicitLeft = 23
+      ExplicitTop = 196
+      ExplicitWidth = 204
     end
     object btnDraws: TButton
       AlignWithMargins = True
-      Left = 23
-      Top = 237
-      Width = 204
-      Height = 40
+      Left = 13
+      Top = 181
+      Width = 174
+      Height = 30
       Margins.Top = 15
       Align = alTop
-      Caption = 'Draws'
+      Caption = 'btnDraws'
       TabOrder = 3
       OnClick = btnDrawsClick
     end
     object btnFrequency: TButton
       AlignWithMargins = True
-      Left = 23
-      Top = 326
-      Width = 204
-      Height = 40
+      Left = 13
+      Top = 250
+      Width = 174
+      Height = 30
       Align = alTop
-      Caption = 'Frequency'
+      Caption = 'btnFrequency'
       TabOrder = 4
       OnClick = btnFrequencyClick
     end
     object cmbLanguages: TComboBox
       AlignWithMargins = True
-      Left = 23
-      Top = 526
-      Width = 204
+      Left = 13
+      Top = 525
+      Width = 174
       Height = 23
       Align = alBottom
       Style = csDropDownList
       TabOrder = 5
       OnChange = cmbLanguagesChange
+      ExplicitLeft = 23
+      ExplicitTop = 526
+      ExplicitWidth = 204
     end
   end
   object pnlMain: TPanel
-    Left = 250
+    Left = 203
     Top = 0
-    Width = 374
-    Height = 572
+    Width = 581
+    Height = 561
     Align = alClient
+    BevelOuter = bvNone
     TabOrder = 1
+    ExplicitLeft = 250
+    ExplicitWidth = 374
+    ExplicitHeight = 572
   end
 end

@@ -4,34 +4,32 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  System.Generics.Collections,
-  dmMain,
-  frBase,
-  uTranslations,
-  fDrawEdit, uDateUtils, uDraw, uGrids, uLottery, Vcl.Grids;
+  System.Generics.Collections, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
+  Vcl.ExtCtrls, Vcl.Grids,
+  dmMain, uTranslations,
+  fDrawEdit, uDateUtils, uDraw, uGrids, uLottery;
 
 type
-  TfrmDraws = class(TfrmBase)
+  TfrmDraws = class(TFrame, ITranslatable)
     pnlContainer: TPanel;
     lblTitle: TLabel;
-    drgDraws: TDrawGrid;
+    grdData: TDrawGrid;
     pnlButtons: TPanel;
     btnAdd: TButton;
     btnEdit: TButton;
-    procedure drgDrawsDrawCell(Sender: TObject; ACol, ARow: LongInt;
+    procedure grdDataDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
-    procedure drgDrawsSelectCell(Sender: TObject; ACol, ARow: LongInt;
-      var CanSelect: Boolean);
     procedure btnAddClick(Sender: TObject);
     procedure btnEditClick(Sender: TObject);
+    procedure grdDataSelectCell(Sender: TObject; ACol, ARow: LongInt;
+      var CanSelect: Boolean);
   private
     FLottery: TLottery;
     FDraws: TList<TDraw>;
     function GetSelectedDraw: TDraw;
   public
-    procedure ApplyLanguage; override;
-    procedure SetData(ALottery: TLottery); override;
+    procedure ApplyLanguage;
+    procedure SetData(ALottery: TLottery);
   end;
 
 implementation
@@ -40,33 +38,14 @@ implementation
 
 procedure TfrmDraws.SetData(ALottery: TLottery);
 begin
-
   FLottery := ALottery;
   FDraws := DM.GetDraws(FLottery.ID);
   ApplyLanguage;
 
-  with drgDraws do
-  begin
-    ColCount := 1 + FLottery.MainCount + FLottery.ExtraCount;
-    RowCount := FDraws.Count;
-    DoubleBuffered := True;
-    ColWidths[0] := 100;
-  end;
-end;
-
-procedure TfrmDraws.ApplyLanguage;
-begin
-  lblTitle.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'DRAW_RESULTS');
-  btnAdd.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BTN_ADD');
-  btnEdit.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BTN_EDIT');
-end;
-
-function TfrmDraws.GetSelectedDraw: TDraw;
-begin
-  if (drgDraws.Row >= 0) and (drgDraws.Row < FDraws.Count) then
-    Result := FDraws[drgDraws.Row]
-  else
-    Result := nil;
+  grdData.ColCount := 1 + FLottery.MainCount + FLottery.ExtraCount;
+  grdData.RowCount := FDraws.Count;
+  grdData.DoubleBuffered := True;
+  grdData.ColWidths[0] := 85;
 end;
 
 procedure TfrmDraws.btnAddClick(Sender: TObject);
@@ -77,7 +56,7 @@ begin
     if fmDrawEdit.ShowModal = mrOk then
     begin
       SetData(FLottery);
-      drgDraws.Invalidate;
+      grdData.Invalidate;
     end;
   finally
     fmDrawEdit.Free;
@@ -97,28 +76,31 @@ begin
     if fmDrawEdit.ShowModal = mrOk then
     begin
       SetData(FLottery);
-      drgDraws.Invalidate;
+      grdData.Invalidate;
     end;
   finally
     fmDrawEdit.Free;
   end;
 end;
 
-procedure TfrmDraws.drgDrawsDrawCell(Sender: TObject; ACol, ARow: LongInt;
+procedure TfrmDraws.grdDataDrawCell(Sender: TObject; ACol, ARow: LongInt;
   Rect: TRect; State: TGridDrawState);
 var
   Num: Integer;
 begin
   if ARow >= FDraws.Count then Exit;
-  drgDraws.Canvas.Brush.Color := clWindow;
-  drgDraws.Canvas.FillRect(Rect);
+  grdData.Canvas.Brush.Color := clWindow;
+  grdData.Canvas.FillRect(Rect);
 
   if ACol = 0 then
-    TGrids.CenterText(drgDraws.Canvas, Rect, TDateUtils.FormatDate(FDraws[ARow].DrawDate))
+  begin
+    grdData.Canvas.Font.Style := [fsBold];
+    TGrids.CenterText(grdData.Canvas, Rect, TDateUtils.FormatDate(FDraws[ARow].DrawDate));
+  end
   else if (ACol >= 1) and (ACol <= FLottery.MainCount) then
   begin
     Num := FDraws[ARow].MainNumbersArr[ACol-1];
-    TGrids.DrawCircle(drgDraws.Canvas, Rect, IntToStr(Num), 'main');
+    TGrids.DrawCircle(grdData.Canvas, Rect, IntToStr(Num), 'main');
   end
   else
   begin
@@ -126,15 +108,30 @@ begin
     if ExtraIndex <= High(FDraws[ARow].ExtraNumbersArr) then
     begin
       Num := FDraws[ARow].ExtraNumbersArr[ExtraIndex];
-      TGrids.DrawCircle(drgDraws.Canvas, Rect, IntToStr(Num), 'extra');
+      TGrids.DrawCircle(grdData.Canvas, Rect, IntToStr(Num), 'extra');
     end;
   end
 end;
 
-procedure TfrmDraws.drgDrawsSelectCell(Sender: TObject; ACol, ARow: LongInt;
+procedure TfrmDraws.grdDataSelectCell(Sender: TObject; ACol, ARow: LongInt;
   var CanSelect: Boolean);
 begin
   btnEdit.Enabled := (ARow >= 0) and (ARow < FDraws.Count);
+end;
+
+function TfrmDraws.GetSelectedDraw: TDraw;
+begin
+  if (grdData.Row >= 0) and (grdData.Row < FDraws.Count) then
+    Result := FDraws[grdData.Row]
+  else
+    Result := nil;
+end;
+
+procedure TfrmDraws.ApplyLanguage;
+begin
+  lblTitle.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'DRAW_RESULTS');
+  btnAdd.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BTN_ADD');
+  btnEdit.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BTN_EDIT');
 end;
 
 end.

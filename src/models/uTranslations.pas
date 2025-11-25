@@ -6,6 +6,11 @@ uses
   System.Generics.Collections, uLanguage;
 
 type
+  ITranslatable = interface
+    ['{7361AB78-E621-4352-912A-D65157D07780}']
+    procedure ApplyLanguage;
+  end;
+
   TTranslations = class
   private
     class var FDict: TDictionary<string, TDictionary<string,string>>;
@@ -26,17 +31,21 @@ begin
 
   // English
   LangDict := TDictionary<string,string>.Create;
-
   LangDict.Add('ANALYTICS', 'Analytics');
   LangDict.Add('DRAWS', 'Draws');
   LangDict.Add('DRAW_ADD', 'Add draw data');
   LangDict.Add('DRAW_EDIT', 'Edit draw data');
   LangDict.Add('DRAW_RESULTS', 'Draw results');
+  LangDict.Add('EXTRA', 'Extra');
   LangDict.Add('EXTRA_NUMBERS', 'Extra numbers');
+  LangDict.Add('FREQUENCY', 'Frequency');
   LangDict.Add('FREQUENCY_ANALYSIS', 'Frequency analysis');
+  LangDict.Add('GAPS', 'Gaps');
   LangDict.Add('LANG', 'Language');
   LangDict.Add('MAIN_NUMBERS', 'Main numbers');
-  LangDict.Add('NUMBER_STATISTICS', 'Number Statistics');
+  LangDict.Add('NUMBER', 'Number');
+  LangDict.Add('OVERALL', 'Overall');
+  LangDict.Add('PAIRS', 'Pairs');
   LangDict.Add('PERIOD', 'Period');
   LangDict.Add('BTN_ADD', 'Add');
   LangDict.Add('BTN_EDIT', 'Edit');
@@ -51,11 +60,16 @@ begin
   LangDict.Add('DRAW_ADD', 'Hinzufügen von Ziehungsdaten');
   LangDict.Add('DRAW_EDIT', 'Bearbeiten von Ziehungsdaten');
   LangDict.Add('DRAW_RESULTS', 'Ziehungsergebnisse');
+  LangDict.Add('EXTRA', 'Extra');
   LangDict.Add('EXTRA_NUMBERS', 'Zusatzzahlen');
+  LangDict.Add('FREQUENCY', 'Häufigkeit');
   LangDict.Add('FREQUENCY_ANALYSIS', 'Häufigkeitsanalyse');
+  LangDict.Add('GAPS', 'Aussetzer');
   LangDict.Add('LANG', 'Sprache');
   LangDict.Add('MAIN_NUMBERS', 'Hauptzahlen');
-  LangDict.Add('NUMBER_STATISTICS', 'Zahlenstatistik');
+  LangDict.Add('NUMBER', 'Nummer');
+  LangDict.Add('OVERALL', 'Gesamt');
+  LangDict.Add('PAIRS', 'Paare');
   LangDict.Add('PERIOD', 'Zeitraum');
   LangDict.Add('BTN_ADD', 'Hinzufügen');
   LangDict.Add('BTN_EDIT', 'Bearbeiten');
@@ -70,11 +84,16 @@ begin
   LangDict.Add('DRAW_ADD', 'Добавление данных розыгрыша');
   LangDict.Add('DRAW_EDIT', 'Редактирование данных розыгрыша');
   LangDict.Add('DRAW_RESULTS', 'Результаты розыгрышей');
+  LangDict.Add('EXTRA', 'Дополнительные');
   LangDict.Add('EXTRA_NUMBERS', 'Дополнительные номера');
+  LangDict.Add('FREQUENCY', 'Частота');
   LangDict.Add('FREQUENCY_ANALYSIS', 'Частотный анализ');
+  LangDict.Add('GAPS', 'Пропуски');
   LangDict.Add('LANG', 'Язык');
   LangDict.Add('MAIN_NUMBERS', 'Основные номера');
-  LangDict.Add('NUMBER_STATISTICS', 'Статистика по номерам');
+  LangDict.Add('NUMBER', 'Номер');
+  LangDict.Add('OVERALL', 'Основные');
+  LangDict.Add('PAIRS', 'Пары');
   LangDict.Add('PERIOD', 'Период');
   LangDict.Add('BTN_ADD', 'Добавить');
   LangDict.Add('BTN_EDIT', 'Редактировать');

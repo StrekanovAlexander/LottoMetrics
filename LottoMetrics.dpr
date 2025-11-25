@@ -5,6 +5,7 @@ uses
   fMain in 'src\forms\main\fMain.pas' {fmMain},
   dmMain in 'src\data\dmMain.pas' {DM: TDataModule},
   uLottery in 'src\models\uLottery.pas',
+  frDraws in 'src\frames\frDraws.pas' {frmDraws: TFrame},
   uDraw in 'src\models\uDraw.pas',
   uNumberUtils in 'src\utils\uNumberUtils.pas',
   uDateUtils in 'src\utils\uDateUtils.pas',
@@ -17,9 +18,7 @@ uses
   uLotteryRepo in 'src\data\uLotteryRepo.pas',
   uDrawRepo in 'src\data\uDrawRepo.pas',
   uTranslations in 'src\models\uTranslations.pas',
-  frBase in 'src\frames\frBase.pas',
-  frFrequency in 'src\frames\frFrequency.pas' {frmFrequency: TFrame},
-  frDraws in 'src\frames\frDraws.pas' {frmDraws: TFrame};
+  frFrequency in 'src\frames\frFrequency.pas' {frmFrequency: TFrame};
 
 {$R *.res}
 
