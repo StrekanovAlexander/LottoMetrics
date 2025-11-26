@@ -20,7 +20,8 @@ uses
   uTranslations in 'src\models\uTranslations.pas',
   frFrequency in 'src\frames\frFrequency.pas' {frmFrequency: TFrame},
   uAnalyticsRepo in 'src\data\uAnalyticsRepo.pas',
-  uAnalyticRecords in 'src\models\uAnalyticRecords.pas';
+  uAnalyticRecords in 'src\models\uAnalyticRecords.pas',
+  fWait in 'src\forms\fWait.pas' {fmWait};
 
 {$R *.res}
 

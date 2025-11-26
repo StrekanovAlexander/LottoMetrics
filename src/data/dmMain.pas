@@ -34,7 +34,10 @@ type
     property CurrentLanguage: TLanguage read FCurrentLanguage;
 
     function GetLotteries: TList<TLottery>;
-    function GetNumberFrequency(ALotteryId: Integer): TList<TNumberFrequency>;
+    function GetSingleNumberFrequency(ALotteryId: Integer): TList<TNumberFrequency>;
+    function GetExtraNumberFrequency(ALotteryId: Integer): TList<TNumberFrequency>;
+    function GetPairNumberFrequency(ALotteryId: Integer): TList<TNumberFrequency>;
+    function GetTripletNumberFrequency(ALotteryId: Integer): TList<TNumberFrequency>;
 
     function GetDraws(ALotteryId: Integer): TList<TDraw>;
     procedure AddDraw(ALotteryId: Integer; ADrawDate: TDateTime; const AMainNumbers: string;
@@ -125,9 +128,24 @@ begin
 end;
 
 // Analytics Frequency
-function TDM.GetNumberFrequency(ALotteryId: Integer): TList<TNumberFrequency>;
+function TDM.GetSingleNumberFrequency(ALotteryId: Integer): TList<TNumberFrequency>;
 begin
-   Result := FetchNumberFrequency(FDQuerySelect, ALotteryId, FPeriodFrom, FPeriodTo);
+   Result := FetchSingleNumberFrequency(FDQuerySelect, ALotteryId, FPeriodFrom, FPeriodTo);
+end;
+
+function TDM.GetExtraNumberFrequency(ALotteryId: Integer): TList<TNumberFrequency>;
+begin
+   Result := FetchExtraNumberFrequency(FDQuerySelect, ALotteryId, FPeriodFrom, FPeriodTo);
+end;
+
+function TDM.GetPairNumberFrequency(ALotteryId: Integer): TList<TNumberFrequency>;
+begin
+   Result := FetchPairNumberFrequency(FDQuerySelect, ALotteryId, FPeriodFrom, FPeriodTo);
+end;
+
+function TDM.GetTripletNumberFrequency(ALotteryId: Integer): TList<TNumberFrequency>;
+begin
+   Result := FetchTripletNumberFrequency(FDQuerySelect, ALotteryId, FPeriodFrom, FPeriodTo);
 end;
 
 // Destroy

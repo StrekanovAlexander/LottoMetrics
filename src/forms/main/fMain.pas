@@ -149,9 +149,8 @@ begin
   DM.SetCurrentLanguage(SelectedLang);
 
   Self.ApplyLanguage;
-   if Supports(FCurrentFrame, ITranslatable, Translatable) then
+  if Supports(FCurrentFrame, ITranslatable, Translatable) then
     Translatable.ApplyLanguage;
-
 end;
 
 // Lotteries
@@ -193,7 +192,9 @@ begin
   begin
     DM.SetPeriod(dtpPeriodFrom.Date, dtpPeriodTo.Date);
     if FCurrentFrame is TfrmDraws then
-      SetFrame(TfrmDraws);
+      SetFrame(TfrmDraws)
+    else if FCurrentFrame is TfrmFrequency then
+      SetFrame(TfrmFrequency);
   end;
 end;
 

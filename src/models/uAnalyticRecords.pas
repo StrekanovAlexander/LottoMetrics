@@ -4,7 +4,7 @@ interface
 
 type
   TNumberFrequency = record
-    Number: Integer;
+    Numbers: TArray<Integer>;
     Frequency: Integer;
 end;
 

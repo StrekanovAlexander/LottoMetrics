@@ -192,3 +192,125 @@ begin
   UPDATE languages SET is_default = true WHERE id = :p_language_id;
   UPDATE languages SET is_default = false WHERE id != :p_language_id;
 end
+
+create or alter procedure get_single_number_frequency (
+    p_lottery_id integer,
+    p_start_date date,
+    p_end_date date)
+returns (
+    number smallint,
+    frequency integer)
+as
+begin
+  FOR
+    SELECT
+        dn.number,
+        COUNT(*) AS frequency
+    FROM DRAW_NUMBERS dn
+    JOIN DRAWS d ON dn.draw_id = d.id
+    WHERE d.draw_date BETWEEN :p_start_date AND :p_end_date
+      AND dn.number_kind = 'main'
+    GROUP BY dn.number
+    ORDER BY frequency DESC
+    INTO :number, :frequency
+  DO
+    SUSPEND;
+end
+
+create or alter procedure get_pair_number_frequency (
+    p_lottery_id integer,
+    p_start_date date,
+    p_end_date date)
+returns (
+    number1 smallint,
+    number2 smallint,
+    frequency integer)
+as
+begin
+  for
+    select
+        dn1.number as number1,
+        dn2.number as number2,
+        count(*) as frequency
+    from draw_numbers dn1
+    join draw_numbers dn2
+      on dn1.draw_id = dn2.draw_id
+     and dn1.number < dn2.number
+    join draws d
+      on dn1.draw_id = d.id
+    where d.lottery_id = :p_lottery_id
+      and d.draw_date between :p_start_date and :p_end_date
+      and dn1.number_kind = 'main'
+      and dn2.number_kind = 'main'
+    group by dn1.number, dn2.number
+    order by frequency desc
+    into :number1, :number2, :frequency
+  do
+    suspend;
+end
+
+create or alter procedure get_triplet_number_frequency (
+    p_lottery_id integer,
+    p_start_date date,
+    p_end_date date
+)
+returns (
+    number1 smallint,
+    number2 smallint,
+    number3 smallint,
+    frequency integer
+)
+as
+begin
+  for
+    select
+        dn1.number as number1,
+        dn2.number as number2,
+        dn3.number as number3,
+        count(*) as frequency
+    from draw_numbers dn1
+    join draw_numbers dn2
+      on dn1.draw_id = dn2.draw_id
+     and dn1.number < dn2.number
+    join draw_numbers dn3
+      on dn1.draw_id = dn3.draw_id
+     and dn2.number < dn3.number
+    join draws d
+      on dn1.draw_id = d.id
+    where d.lottery_id = :p_lottery_id
+      and d.draw_date between :p_start_date and :p_end_date
+      and dn1.number_kind = 'main'
+      and dn2.number_kind = 'main'
+      and dn3.number_kind = 'main'
+    group by dn1.number, dn2.number, dn3.number
+    order by frequency desc
+    into :number1, :number2, :number3, :frequency
+  do
+    suspend;
+end
+
+create or alter procedure get_extra_number_frequency (
+    p_lottery_id integer,
+    p_start_date date,
+    p_end_date date)
+returns (
+    number smallint,
+    frequency integer)
+as
+begin
+  FOR
+    SELECT
+      dn.number,
+      COUNT(*) AS frequency
+    FROM DRAW_NUMBERS dn
+    JOIN DRAWS d ON dn.draw_id = d.id
+    WHERE
+      d.lottery_id = :p_lottery_id
+      AND d.draw_date BETWEEN :p_start_date AND :p_end_date
+      AND dn.number_kind = 'extra'
+    GROUP BY dn.number
+    ORDER BY frequency DESC
+    INTO :number, :frequency
+  DO
+    SUSPEND;
+end

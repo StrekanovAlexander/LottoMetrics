@@ -37,7 +37,6 @@ object fmMain: TfmMain
     ParentBackground = False
     ParentCtl3D = False
     TabOrder = 0
-    ExplicitHeight = 441
     object lblLotteryName: TLabel
       AlignWithMargins = True
       Left = 13
@@ -74,7 +73,6 @@ object fmMain: TfmMain
       Margins.Top = 15
       Align = alTop
       Caption = 'lblAnalytics'
-      ExplicitTop = 249
       ExplicitWidth = 61
     end
     object lblLanguage: TLabel
@@ -85,8 +83,6 @@ object fmMain: TfmMain
       Height = 15
       Align = alBottom
       Caption = 'Language'
-      ExplicitLeft = 23
-      ExplicitTop = 505
       ExplicitWidth = 52
     end
     object cmbLotteries: TComboBox
@@ -100,7 +96,6 @@ object fmMain: TfmMain
       ExtendedUI = True
       TabOrder = 0
       OnChange = cmbLotteriesChange
-      ExplicitTop = 72
     end
     object dtpPeriodFrom: TDateTimePicker
       AlignWithMargins = True
@@ -114,9 +109,6 @@ object fmMain: TfmMain
       Time = 0.483649108798999800
       TabOrder = 1
       OnCloseUp = dtpPeriodFromCloseUp
-      ExplicitLeft = 23
-      ExplicitTop = 165
-      ExplicitWidth = 204
     end
     object dtpPeriodTo: TDateTimePicker
       AlignWithMargins = True
@@ -131,9 +123,6 @@ object fmMain: TfmMain
       Time = 0.485294745369174100
       TabOrder = 2
       OnCloseUp = dtpPeriodFromCloseUp
-      ExplicitLeft = 23
-      ExplicitTop = 196
-      ExplicitWidth = 204
     end
     object btnDraws: TButton
       AlignWithMargins = True
@@ -168,9 +157,6 @@ object fmMain: TfmMain
       Style = csDropDownList
       TabOrder = 5
       OnChange = cmbLanguagesChange
-      ExplicitLeft = 23
-      ExplicitTop = 526
-      ExplicitWidth = 204
     end
   end
   object pnlMain: TPanel
@@ -181,8 +167,5 @@ object fmMain: TfmMain
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = 250
-    ExplicitWidth = 374
-    ExplicitHeight = 572
   end
 end

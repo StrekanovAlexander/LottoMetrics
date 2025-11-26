@@ -163,6 +163,10 @@
         </DCCReference>
         <DCCReference Include="src\data\uAnalyticsRepo.pas"/>
         <DCCReference Include="src\models\uAnalyticRecords.pas"/>
+        <DCCReference Include="src\forms\fWait.pas">
+            <Form>fmWait</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

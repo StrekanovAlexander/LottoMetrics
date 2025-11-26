@@ -63,6 +63,7 @@ object frmFrequency: TfrmFrequency
         Height = 35
         Align = alLeft
         Caption = 'btnTriplets'
+        OnClick = btnTripletsClick
         ExplicitLeft = 215
       end
       object btnPairs: TSpeedButton
@@ -73,6 +74,7 @@ object frmFrequency: TfrmFrequency
         Height = 35
         Align = alLeft
         Caption = 'btnPairs'
+        OnClick = btnPairsClick
       end
       object btnBonus: TSpeedButton
         AlignWithMargins = True
@@ -82,6 +84,7 @@ object frmFrequency: TfrmFrequency
         Height = 35
         Align = alLeft
         Caption = 'btnBonus'
+        OnClick = btnBonusClick
         ExplicitLeft = 318
       end
     end
@@ -99,10 +102,18 @@ object frmFrequency: TfrmFrequency
       Ctl3D = False
       DefaultColWidth = 35
       DefaultRowHeight = 35
+      DoubleBuffered = True
       FixedCols = 0
       RowCount = 2
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
       Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSelect, goFixedRowDefAlign]
       ParentCtl3D = False
+      ParentDoubleBuffered = False
+      ParentFont = False
       TabOrder = 1
       OnDrawCell = grdDataDrawCell
     end
