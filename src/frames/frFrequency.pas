@@ -3,12 +3,14 @@ unit frFrequency;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Winapi.Windows, Winapi.Messages,
+  System.SysUtils, System.Variants, System.Classes, System.Generics.Collections,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Grids,
   Vcl.Buttons, Vcl.StdCtrls,
   dmMain,
   uLottery, uTranslations,
-  uGrids
+  uGrids,
+  uAnalyticRecords
   ;
 
 type
@@ -16,15 +18,18 @@ type
     pnlContainer: TPanel;
     lblTitle: TLabel;
     pnlModes: TPanel;
-    btnOverall: TSpeedButton;
+    btnSingles: TSpeedButton;
     grdData: TDrawGrid;
-    btnGaps: TSpeedButton;
+    btnTriplets: TSpeedButton;
     btnPairs: TSpeedButton;
-    btnExtra: TSpeedButton;
+    btnBonus: TSpeedButton;
     procedure grdDataDrawCell(Sender: TObject; ACol, ARow: LongInt; Rect: TRect;
       State: TGridDrawState);
+    procedure btnSinglesClick(Sender: TObject);
   private
-    procedure SetOverall;
+    FLottery: TLottery;
+    FList: TList<TNumberFrequency>;
+    procedure SetSingles;
   public
     procedure SetData(ALottery: TLottery);
     procedure ApplyLanguage;
@@ -36,38 +41,61 @@ implementation
 
 procedure TfrmFrequency.grdDataDrawCell(Sender: TObject; ACol, ARow: LongInt;
   Rect: TRect; State: TGridDrawState);
+var
+  Item: TNumberFrequency;
 begin
+  if ARow >= FList.Count then Exit;
+  grdData.Canvas.Font.Style := [fsBold];
   if ARow = 0 then
   begin
     grdData.Canvas.Font.Style := [fsBold];
-    case ACol of
-      1: TGrids.CenterText(grdData.Canvas, Rect,
-        TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'FREQUENCY'));
-
+    if ACol = 1 then
+    begin
+      TGrids.CenterText(grdData.Canvas, Rect,
+      TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'FREQUENCY'));
     end;
   end
-
+  else
+  begin
+    begin
+      Item := FList[ARow-1];
+      case ACol of
+        0: TGrids.DrawCircle(grdData.Canvas, Rect, IntToStr(Item.Number), 'main');
+        1: TGrids.CenterText(grdData.Canvas, Rect, Item.Frequency.ToString);
+      end;
+    end;
+  end;
 end;
 
 procedure TfrmFrequency.SetData(ALottery: TLottery);
 begin
-  SetOverall;
+  FLottery := ALottery;
+  SetSingles;
   ApplyLanguage;
 end;
 
 procedure TfrmFrequency.ApplyLanguage;
 begin
-  btnExtra.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'EXTRA');
-  btnGaps.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'GAPS');
-  btnOverall.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'OVERALL');
+  btnSingles.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'SINGLES');
   btnPairs.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'PAIRS');
+  btnTriplets.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'TRIPLETS');
+  btnBonus.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BONUS');
 
   lblTitle.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'FREQUENCY_ANALYSIS');
 end;
 
-procedure TfrmFrequency.SetOverall;
+procedure TfrmFrequency.SetSingles;
 begin
+  FList := DM.GetNumberFrequency(FLottery.ID);
+  grdData.RowCount := FList.Count;
+  grdData.DoubleBuffered := True;
+  grdData.ColCount := 2;
   grdData.ColWidths[1] := 100;
+end;
+
+procedure TfrmFrequency.btnSinglesClick(Sender: TObject);
+begin
+  SetSingles;
 end;
 
 end.

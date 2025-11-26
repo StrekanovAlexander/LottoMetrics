@@ -17,10 +17,6 @@ object frmFrequency: TfrmFrequency
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = 216
-    ExplicitTop = 168
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object lblTitle: TLabel
       AlignWithMargins = True
       Left = 3
@@ -47,10 +43,7 @@ object frmFrequency: TfrmFrequency
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = 208
-      ExplicitTop = 120
-      ExplicitWidth = 185
-      object btnOverall: TSpeedButton
+      object btnSingles: TSpeedButton
         AlignWithMargins = True
         Left = 0
         Top = 3
@@ -58,17 +51,18 @@ object frmFrequency: TfrmFrequency
         Height = 35
         Margins.Left = 0
         Align = alLeft
-        Caption = 'btnOverall'
+        Caption = 'btnSingles'
+        OnClick = btnSinglesClick
         ExplicitLeft = 3
       end
-      object btnGaps: TSpeedButton
+      object btnTriplets: TSpeedButton
         AlignWithMargins = True
         Left = 237
         Top = 3
         Width = 100
         Height = 35
         Align = alLeft
-        Caption = 'btnGaps'
+        Caption = 'btnTriplets'
         ExplicitLeft = 215
       end
       object btnPairs: TSpeedButton
@@ -80,14 +74,14 @@ object frmFrequency: TfrmFrequency
         Align = alLeft
         Caption = 'btnPairs'
       end
-      object btnExtra: TSpeedButton
+      object btnBonus: TSpeedButton
         AlignWithMargins = True
         Left = 343
         Top = 3
         Width = 125
         Height = 35
         Align = alLeft
-        Caption = 'btnExtra'
+        Caption = 'btnBonus'
         ExplicitLeft = 318
       end
     end
@@ -111,8 +105,6 @@ object frmFrequency: TfrmFrequency
       ParentCtl3D = False
       TabOrder = 1
       OnDrawCell = grdDataDrawCell
-      ExplicitTop = 37
-      ExplicitHeight = 379
     end
   end
 end

@@ -161,6 +161,8 @@
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
+        <DCCReference Include="src\data\uAnalyticsRepo.pas"/>
+        <DCCReference Include="src\models\uAnalyticRecords.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

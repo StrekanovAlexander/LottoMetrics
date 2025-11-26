@@ -48,41 +48,6 @@ begin
   grdData.ColWidths[0] := 85;
 end;
 
-procedure TfrmDraws.btnAddClick(Sender: TObject);
-var fmDrawEdit: TfmDrawEdit;
-begin
-  fmDrawEdit := TfmDrawEdit.Create(Self, FLottery, nil);
-  try
-    if fmDrawEdit.ShowModal = mrOk then
-    begin
-      SetData(FLottery);
-      grdData.Invalidate;
-    end;
-  finally
-    fmDrawEdit.Free;
-  end;
-end;
-
-procedure TfrmDraws.btnEditClick(Sender: TObject);
-var fmDrawEdit: TfmDrawEdit;
-  Draw: TDraw;
-begin
-  Draw := GetSelectedDraw;
-  if not Assigned(Draw) then
-    Exit;
-
-  fmDrawEdit := TfmDrawEdit.Create(Self, FLottery, Draw);
-  try
-    if fmDrawEdit.ShowModal = mrOk then
-    begin
-      SetData(FLottery);
-      grdData.Invalidate;
-    end;
-  finally
-    fmDrawEdit.Free;
-  end;
-end;
-
 procedure TfrmDraws.grdDataDrawCell(Sender: TObject; ACol, ARow: LongInt;
   Rect: TRect; State: TGridDrawState);
 var
@@ -133,5 +98,42 @@ begin
   btnAdd.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BTN_ADD');
   btnEdit.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BTN_EDIT');
 end;
+
+// Buttons
+procedure TfrmDraws.btnAddClick(Sender: TObject);
+var fmDrawEdit: TfmDrawEdit;
+begin
+  fmDrawEdit := TfmDrawEdit.Create(Self, FLottery, nil);
+  try
+    if fmDrawEdit.ShowModal = mrOk then
+    begin
+      SetData(FLottery);
+      grdData.Invalidate;
+    end;
+  finally
+    fmDrawEdit.Free;
+  end;
+end;
+
+procedure TfrmDraws.btnEditClick(Sender: TObject);
+var fmDrawEdit: TfmDrawEdit;
+  Draw: TDraw;
+begin
+  Draw := GetSelectedDraw;
+  if not Assigned(Draw) then
+    Exit;
+
+  fmDrawEdit := TfmDrawEdit.Create(Self, FLottery, Draw);
+  try
+    if fmDrawEdit.ShowModal = mrOk then
+    begin
+      SetData(FLottery);
+      grdData.Invalidate;
+    end;
+  finally
+    fmDrawEdit.Free;
+  end;
+end;
+
 
 end.

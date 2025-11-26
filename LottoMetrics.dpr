@@ -18,7 +18,9 @@ uses
   uLotteryRepo in 'src\data\uLotteryRepo.pas',
   uDrawRepo in 'src\data\uDrawRepo.pas',
   uTranslations in 'src\models\uTranslations.pas',
-  frFrequency in 'src\frames\frFrequency.pas' {frmFrequency: TFrame};
+  frFrequency in 'src\frames\frFrequency.pas' {frmFrequency: TFrame},
+  uAnalyticsRepo in 'src\data\uAnalyticsRepo.pas',
+  uAnalyticRecords in 'src\models\uAnalyticRecords.pas';
 
 {$R *.res}
 

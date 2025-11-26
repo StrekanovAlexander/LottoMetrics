@@ -9,8 +9,9 @@ uses
   Data.DB, FireDAC.Comp.Client, FireDAC.Phys.FBDef, FireDAC.Phys.IBBase,
   FireDAC.Phys.FB, Vcl.Dialogs, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, System.Generics.Collections,
-  uDrawRepo, uLanguageRepo, uLotteryRepo,  uDraw, uLanguage, uLottery,
-  uTranslations;
+  uAnalyticsRepo, uDrawRepo, uLanguageRepo, uLotteryRepo,
+  uDraw, uLanguage, uLottery, uTranslations,
+  uAnalyticRecords;
 
 type
   TDM = class(TDataModule)
@@ -33,6 +34,7 @@ type
     property CurrentLanguage: TLanguage read FCurrentLanguage;
 
     function GetLotteries: TList<TLottery>;
+    function GetNumberFrequency(ALotteryId: Integer): TList<TNumberFrequency>;
 
     function GetDraws(ALotteryId: Integer): TList<TDraw>;
     procedure AddDraw(ALotteryId: Integer; ADrawDate: TDateTime; const AMainNumbers: string;
@@ -120,6 +122,12 @@ procedure TDM.UpdateDraw(ADrawId: Integer; ADrawDate: TDateTime; const AMainNumb
   const AExtraNumbers: string);
 begin
   EditDraw(FDQueryExec, ADrawId, ADrawDate, AMainNumbers, AExtraNumbers);
+end;
+
+// Analytics Frequency
+function TDM.GetNumberFrequency(ALotteryId: Integer): TList<TNumberFrequency>;
+begin
+   Result := FetchNumberFrequency(FDQuerySelect, ALotteryId, FPeriodFrom, FPeriodTo);
 end;
 
 // Destroy

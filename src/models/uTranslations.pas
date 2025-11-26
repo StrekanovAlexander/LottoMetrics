@@ -32,6 +32,7 @@ begin
   // English
   LangDict := TDictionary<string,string>.Create;
   LangDict.Add('ANALYTICS', 'Analytics');
+  LangDict.Add('BONUS', 'Bonus');
   LangDict.Add('DRAWS', 'Draws');
   LangDict.Add('DRAW_ADD', 'Add draw data');
   LangDict.Add('DRAW_EDIT', 'Edit draw data');
@@ -44,8 +45,9 @@ begin
   LangDict.Add('LANG', 'Language');
   LangDict.Add('MAIN_NUMBERS', 'Main numbers');
   LangDict.Add('NUMBER', 'Number');
-  LangDict.Add('OVERALL', 'Overall');
   LangDict.Add('PAIRS', 'Pairs');
+  LangDict.Add('SINGLES', 'Singles');
+  LangDict.Add('TRIPLETS', 'Triplets');
   LangDict.Add('PERIOD', 'Period');
   LangDict.Add('BTN_ADD', 'Add');
   LangDict.Add('BTN_EDIT', 'Edit');
@@ -56,6 +58,7 @@ begin
   // Deutsch
   LangDict := TDictionary<string,string>.Create;
   LangDict.Add('ANALYTICS', 'Analyse');
+  LangDict.Add('BONUS', 'Superzahl');
   LangDict.Add('DRAWS', 'Ziehungen');
   LangDict.Add('DRAW_ADD', 'Hinzufügen von Ziehungsdaten');
   LangDict.Add('DRAW_EDIT', 'Bearbeiten von Ziehungsdaten');
@@ -68,9 +71,10 @@ begin
   LangDict.Add('LANG', 'Sprache');
   LangDict.Add('MAIN_NUMBERS', 'Hauptzahlen');
   LangDict.Add('NUMBER', 'Nummer');
-  LangDict.Add('OVERALL', 'Gesamt');
   LangDict.Add('PAIRS', 'Paare');
   LangDict.Add('PERIOD', 'Zeitraum');
+  LangDict.Add('SINGLES', 'Einzelzahlen');
+  LangDict.Add('TRIPLETS', 'Dreier');
   LangDict.Add('BTN_ADD', 'Hinzufügen');
   LangDict.Add('BTN_EDIT', 'Bearbeiten');
   LangDict.Add('BTN_OK', 'OK');
@@ -80,6 +84,7 @@ begin
   // Russian
   LangDict := TDictionary<string,string>.Create;
   LangDict.Add('ANALYTICS', 'Аналитика');
+  LangDict.Add('BONUS', 'Дополнительные');
   LangDict.Add('DRAWS', 'Розыгрыши');
   LangDict.Add('DRAW_ADD', 'Добавление данных розыгрыша');
   LangDict.Add('DRAW_EDIT', 'Редактирование данных розыгрыша');
@@ -92,9 +97,10 @@ begin
   LangDict.Add('LANG', 'Язык');
   LangDict.Add('MAIN_NUMBERS', 'Основные номера');
   LangDict.Add('NUMBER', 'Номер');
-  LangDict.Add('OVERALL', 'Основные');
   LangDict.Add('PAIRS', 'Пары');
   LangDict.Add('PERIOD', 'Период');
+  LangDict.Add('SINGLES', 'Одиночные');
+  LangDict.Add('TRIPLETS', 'Тройки');
   LangDict.Add('BTN_ADD', 'Добавить');
   LangDict.Add('BTN_EDIT', 'Редактировать');
   LangDict.Add('BTN_OK', 'ОК');
