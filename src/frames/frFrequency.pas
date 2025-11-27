@@ -54,6 +54,15 @@ implementation
 
 {$R *.dfm}
 
+procedure TfrmFrequency.SetData(ALottery: TLottery);
+begin
+  FLottery := ALottery;
+  SetSingle;
+  lblPeriodValue.Caption := TDateUtils.FormatDate(DM.PeriodFrom) +
+    ' - ' + TDateUtils.FormatDate(DM.PeriodTo);
+  ApplyLanguage;
+end;
+
 procedure TfrmFrequency.grdDataDrawCell(Sender: TObject; ACol, ARow: LongInt;
   Rect: TRect; State: TGridDrawState);
 var
@@ -103,15 +112,6 @@ begin
   end;
 end;
 
-procedure TfrmFrequency.SetData(ALottery: TLottery);
-begin
-  FLottery := ALottery;
-  SetSingle;
-  lblPeriodValue.Caption := TDateUtils.FormatDate(DM.PeriodFrom) +
-    ' - ' + TDateUtils.FormatDate(DM.PeriodTo);
-  ApplyLanguage;
-end;
-
 procedure TfrmFrequency.ApplyLanguage;
 begin
   btnSingles.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'SINGLES');
@@ -121,6 +121,7 @@ begin
 
   lblTitle.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'FREQUENCY_ANALYSIS');
   lblPeriod.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'PERIOD');
+
 end;
 
 procedure TfrmFrequency.SetSingle;

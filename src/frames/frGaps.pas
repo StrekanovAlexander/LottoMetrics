@@ -26,12 +26,21 @@ type
     tbsChart: TTabSheet;
     tbsHeatMap: TTabSheet;
     DataSource: TDataSource;
-    DBGrid: TDBGrid;
     FDQuery: TFDQuery;
     FDQueryNUMBER: TSmallintField;
     FDQueryGAP: TIntegerField;
     FDQueryLAST_DRAW_DATE: TDateField;
+    gbxMainNumbers: TGroupBox;
+    DBGrid: TDBGrid;
+    gbxExtraNumbers: TGroupBox;
+    FDQueryExtra: TFDQuery;
+    SmallintField1: TSmallintField;
+    IntegerField1: TIntegerField;
+    DateField1: TDateField;
+    DataSourceExtra: TDataSource;
+    DBGridExtra: TDBGrid;
     procedure DBGridTitleClick(Column: TColumn);
+    procedure DBGridExtraTitleClick(Column: TColumn);
   private
     FLottery: TLottery;
     FOrderBy: string;
@@ -67,9 +76,32 @@ begin
   tbsChart.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'CHART');
   tbsHeatMap.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'HEATMAP');
 
+  gbxMainNumbers.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'MAIN_NUMBERS');
+  gbxExtraNumbers.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'EXTRA_NUMBERS');
+
   DBGrid.Columns[0].Title.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER');
   DBGrid.Columns[1].Title.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'GAP');
   DBGrid.Columns[2].Title.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'DATE');
+  DBGridExtra.Columns[0].Title.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER');
+  DBGridExtra.Columns[1].Title.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'GAP');
+  DBGridExtra.Columns[2].Title.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'DATE');
+end;
+
+procedure TfrmGaps.DBGridExtraTitleClick(Column: TColumn);
+begin
+  if FSelectedField = Column.FieldName then
+    if FOrderBy = 'ASC' then
+        FOrderBy := 'DESC'
+    else
+      FOrderBy := 'ASC'
+  else
+    FSelectedField := Column.FieldName;
+  FDQueryExtra.Close;
+  FDQueryExtra.SQL.Text :=
+    'SELECT number, gap, last_draw_date ' +
+    'FROM get_number_gaps(:p_lottery_id, :p_start_date, :p_end_date, :p_number_kind) ' +
+    'ORDER BY ' + FSelectedField + ' ' + FOrderBy;
+  FDQueryExtra.Open;
 end;
 
 procedure TfrmGaps.DBGridTitleClick(Column: TColumn);
@@ -83,8 +115,8 @@ begin
     FSelectedField := Column.FieldName;
   FDQuery.Close;
   FDQuery.SQL.Text :=
-    'SELECT NUMBER, GAP, LAST_DRAW_DATE ' +
-    'FROM GET_NUMBER_GAPS(:P_LOTTERY_ID, :P_START_DATE, :P_END_DATE) ' +
+    'SELECT number, gap, last_draw_date ' +
+    'FROM get_number_gaps(:p_lottery_id, :p_start_date, :p_end_date, :p_number_kind) ' +
     'ORDER BY ' + FSelectedField + ' ' + FOrderBy;
   FDQuery.Open;
 end;
@@ -95,7 +127,15 @@ begin
   FDQuery.ParamByName('p_lottery_id').AsInteger := FLottery.ID;
   FDQuery.ParamByName('p_start_date').AsDate := DM.PeriodFrom;
   FDQuery.ParamByName('p_end_date').AsDate := DM.PeriodTo;
+  FDQuery.ParamByName('p_number_kind').AsString := 'main';
   FDQuery.Open;
+
+  FDQueryExtra.Close;
+  FDQueryExtra.ParamByName('p_lottery_id').AsInteger := FLottery.ID;
+  FDQueryExtra.ParamByName('p_start_date').AsDate := DM.PeriodFrom;
+  FDQueryExtra.ParamByName('p_end_date').AsDate := DM.PeriodTo;
+  FDQueryExtra.ParamByName('p_number_kind').AsString := 'extra';
+  FDQueryExtra.Open;
 end;
 
 end.

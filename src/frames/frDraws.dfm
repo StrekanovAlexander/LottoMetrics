@@ -63,8 +63,6 @@ object frmDraws: TfrmDraws
       TabOrder = 0
       OnDrawCell = grdDataDrawCell
       OnSelectCell = grdDataSelectCell
-      ExplicitTop = 200
-      ExplicitHeight = 216
     end
     object pnlButtons: TPanel
       Left = 0
@@ -113,7 +111,7 @@ object frmDraws: TfrmDraws
         AlignWithMargins = True
         Left = 0
         Top = 3
-        Width = 49
+        Width = 47
         Height = 19
         Margins.Left = 0
         Align = alLeft
@@ -122,13 +120,13 @@ object frmDraws: TfrmDraws
         Font.Color = clWindowText
         Font.Height = -12
         Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         ExplicitHeight = 15
       end
       object lblPeriodValue: TLabel
         AlignWithMargins = True
-        Left = 55
+        Left = 53
         Top = 3
         Width = 79
         Height = 19
@@ -140,6 +138,35 @@ object frmDraws: TfrmDraws
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
+        ExplicitLeft = 55
+        ExplicitHeight = 15
+      end
+      object lblDrawsCount: TLabel
+        AlignWithMargins = True
+        Left = 530
+        Top = 3
+        Width = 81
+        Height = 19
+        Align = alRight
+        Caption = 'lblDrawsCount'
+        Font.Charset = RUSSIAN_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitLeft = 533
+        ExplicitHeight = 15
+      end
+      object lblDrawsCountTitle: TLabel
+        AlignWithMargins = True
+        Left = 424
+        Top = 3
+        Width = 100
+        Height = 19
+        Align = alRight
+        Caption = 'lblDrawsCountTitle'
+        ExplicitLeft = 490
         ExplicitHeight = 15
       end
     end

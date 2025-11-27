@@ -37,6 +37,7 @@ begin
   LangDict.Add('DATE', 'Date');
   LangDict.Add('DRAWS', 'Draws');
   LangDict.Add('DRAW_ADD', 'Add draw data');
+  LangDict.Add('DRAWS_COUNT', 'Draws count');
   LangDict.Add('DRAW_EDIT', 'Edit draw data');
   LangDict.Add('DRAW_GAPS', 'Misses in the draws');
   LangDict.Add('DRAW_RESULTS', 'Draw results');
@@ -69,6 +70,7 @@ begin
   LangDict.Add('DATE', 'Datum');
   LangDict.Add('DRAWS', 'Ziehungen');
   LangDict.Add('DRAW_ADD', 'Hinzufügen von Ziehungsdaten');
+  LangDict.Add('DRAWS_COUNT', 'Anzahl der Ziehungen');
   LangDict.Add('DRAW_EDIT', 'Bearbeiten von Ziehungsdaten');
   LangDict.Add('DRAW_GAPS', 'Aussetzer bei den Ziehungen');
   LangDict.Add('DRAW_RESULTS', 'Ziehungsergebnisse');
@@ -101,6 +103,7 @@ begin
   LangDict.Add('DATE', 'Дата');
   LangDict.Add('DRAWS', 'Розыгрыши');
   LangDict.Add('DRAW_ADD', 'Добавление данных розыгрыша');
+  LangDict.Add('DRAWS_COUNT', 'Количество розыгрышей');
   LangDict.Add('DRAW_EDIT', 'Редактирование данных розыгрыша');
   LangDict.Add('DRAW_GAPS', 'Пропуски в розыгрышах');
   LangDict.Add('DRAW_RESULTS', 'Результаты розыгрышей');
@@ -108,7 +111,7 @@ begin
   LangDict.Add('EXTRA_NUMBERS', 'Дополнительные номера');
   LangDict.Add('FREQUENCY', 'Частота');
   LangDict.Add('FREQUENCY_ANALYSIS', 'Частотный анализ');
-  LangDict.Add('GAP', 'Пропуск');
+  LangDict.Add('GAP', 'Пропусков');
   LangDict.Add('GAPS', 'Пропуски');
   LangDict.Add('HEATMAP', 'Тепловая карта');
   LangDict.Add('LANG', 'Язык');

@@ -20,6 +20,8 @@ type
     pnlPeriod: TPanel;
     lblPeriod: TLabel;
     lblPeriodValue: TLabel;
+    lblDrawsCount: TLabel;
+    lblDrawsCountTitle: TLabel;
     procedure grdDataDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
     procedure btnAddClick(Sender: TObject);
@@ -51,6 +53,8 @@ begin
   grdData.RowCount := FDraws.Count;
   grdData.DoubleBuffered := True;
   grdData.ColWidths[0] := 85;
+
+  lblDrawsCount.Caption := IntToStr(FDraws.Count);
 end;
 
 procedure TfrmDraws.grdDataDrawCell(Sender: TObject; ACol, ARow: LongInt;
@@ -103,6 +107,7 @@ begin
   lblPeriod.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'PERIOD');
   btnAdd.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BTN_ADD');
   btnEdit.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BTN_EDIT');
+  lblDrawsCountTitle.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'DRAWS_COUNT');
 end;
 
 // Buttons
