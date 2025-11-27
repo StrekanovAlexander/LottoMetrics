@@ -32,6 +32,8 @@ type
     procedure SetCurrentLanguage(ALanguage: TLanguage);
     procedure UpdateDefaultLanguage(ALanguageId: Integer);
     property CurrentLanguage: TLanguage read FCurrentLanguage;
+    property PeriodFrom: TDate read FPeriodFrom;
+    property PeriodTo: TDate read FPeriodTo;
 
     function GetLotteries: TList<TLottery>;
     function GetSingleNumberFrequency(ALotteryId: Integer): TList<TNumberFrequency>;

@@ -36,13 +36,14 @@ object frmFrequency: TfrmFrequency
     object pnlModes: TPanel
       AlignWithMargins = True
       Left = 3
-      Top = 32
+      Top = 63
       Width = 614
       Height = 41
       Margins.Top = 5
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitTop = 96
       object btnSingles: TSpeedButton
         AlignWithMargins = True
         Left = 0
@@ -91,9 +92,9 @@ object frmFrequency: TfrmFrequency
     object grdData: TDrawGrid
       AlignWithMargins = True
       Left = 3
-      Top = 86
+      Top = 117
       Width = 614
-      Height = 371
+      Height = 340
       Margins.Top = 10
       Align = alClient
       BevelInner = bvNone
@@ -116,6 +117,51 @@ object frmFrequency: TfrmFrequency
       ParentFont = False
       TabOrder = 1
       OnDrawCell = grdDataDrawCell
+      ExplicitTop = 240
+      ExplicitHeight = 217
+    end
+    object pnlPeriod: TPanel
+      AlignWithMargins = True
+      Left = 3
+      Top = 30
+      Width = 614
+      Height = 25
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 2
+      object lblPeriod: TLabel
+        AlignWithMargins = True
+        Left = 0
+        Top = 3
+        Width = 49
+        Height = 19
+        Margins.Left = 0
+        Align = alLeft
+        Caption = 'lblPeriod'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitHeight = 15
+      end
+      object lblPeriodValue: TLabel
+        AlignWithMargins = True
+        Left = 55
+        Top = 3
+        Width = 79
+        Height = 19
+        Align = alLeft
+        Caption = 'lblPeriodValue'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitHeight = 15
+      end
     end
   end
 end

@@ -158,6 +158,19 @@ object fmMain: TfmMain
       TabOrder = 5
       OnChange = cmbLanguagesChange
     end
+    object btnGaps: TButton
+      AlignWithMargins = True
+      Left = 13
+      Top = 288
+      Width = 174
+      Height = 30
+      Margins.Top = 5
+      Align = alTop
+      Caption = 'btnGaps'
+      TabOrder = 6
+      OnClick = btnGapsClick
+      ExplicitTop = 286
+    end
   end
   object pnlMain: TPanel
     Left = 203

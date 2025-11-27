@@ -106,6 +106,7 @@
         <DCC_ExeOutput>.\dist\</DCC_ExeOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <Icon_MainIcon>resources\logo.ico</Icon_MainIcon>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
@@ -166,6 +167,11 @@
         <DCCReference Include="src\forms\fWait.pas">
             <Form>fmWait</Form>
             <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\frames\frGaps.pas">
+            <Form>frmGaps</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>

@@ -10,7 +10,7 @@ uses
 
   dmMain, fWait,
   uLottery, uTranslations,
-  uGrids,
+  uDateUtils, uGrids,
   uAnalyticRecords
   ;
 
@@ -26,6 +26,9 @@ type
     btnTriplets: TSpeedButton;
     btnPairs: TSpeedButton;
     btnBonus: TSpeedButton;
+    pnlPeriod: TPanel;
+    lblPeriod: TLabel;
+    lblPeriodValue: TLabel;
     procedure grdDataDrawCell(Sender: TObject; ACol, ARow: LongInt; Rect: TRect;
       State: TGridDrawState);
     procedure btnSinglesClick(Sender: TObject);
@@ -104,6 +107,8 @@ procedure TfrmFrequency.SetData(ALottery: TLottery);
 begin
   FLottery := ALottery;
   SetSingle;
+  lblPeriodValue.Caption := TDateUtils.FormatDate(DM.PeriodFrom) +
+    ' - ' + TDateUtils.FormatDate(DM.PeriodTo);
   ApplyLanguage;
 end;
 
@@ -115,6 +120,7 @@ begin
   btnBonus.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BONUS');
 
   lblTitle.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'FREQUENCY_ANALYSIS');
+  lblPeriod.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'PERIOD');
 end;
 
 procedure TfrmFrequency.SetSingle;

@@ -8,7 +8,7 @@ uses
   Vcl.ComCtrls, System.Rtti,
   dmMain,
   uDateUtils, uTranslations, uLanguage, uLottery,
-  frDraws, frFrequency;
+  frDraws, frFrequency, frGaps;
 
 type
   TFrameClass = class of TFrame;
@@ -27,6 +27,7 @@ type
     cmbLanguages: TComboBox;
     lblLanguage: TLabel;
     bvlMain: TBevel;
+    btnGaps: TButton;
     procedure FormCreate(Sender: TObject);
     procedure SetLanguages;
     procedure SetLotteries;
@@ -38,6 +39,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure btnDrawsClick(Sender: TObject);
     procedure btnFrequencyClick(Sender: TObject);
+    procedure btnGapsClick(Sender: TObject);
   private
     FCurrentFrame: TFrame;
     FLottery: TLottery;
@@ -135,6 +137,11 @@ begin
    SetFrame(TfrmFrequency);
 end;
 
+procedure TfmMain.btnGapsClick(Sender: TObject);
+begin
+  SetFrame(TfrmGaps);
+end;
+
 procedure TfmMain.cmbLanguagesChange(Sender: TObject);
 var
   SelectedLang: TLanguage;
@@ -208,6 +215,7 @@ begin
   lblLanguage.Caption := TTranslations.GetText(IsoCode, 'LANG');
   btnDraws.Caption := TTranslations.GetText(IsoCode, 'DRAWS');
   btnFrequency.Caption := TTranslations.GetText(IsoCode, 'FREQUENCY_ANALYSIS');
+  btnGaps.Caption := TTranslations.GetText(IsoCode, 'GAPS');
 end;
 
 // Destroy

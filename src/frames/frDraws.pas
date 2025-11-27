@@ -17,6 +17,9 @@ type
     pnlButtons: TPanel;
     btnAdd: TButton;
     btnEdit: TButton;
+    pnlPeriod: TPanel;
+    lblPeriod: TLabel;
+    lblPeriodValue: TLabel;
     procedure grdDataDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
     procedure btnAddClick(Sender: TObject);
@@ -40,6 +43,8 @@ procedure TfrmDraws.SetData(ALottery: TLottery);
 begin
   FLottery := ALottery;
   FDraws := DM.GetDraws(FLottery.ID);
+  lblPeriodValue.Caption := TDateUtils.FormatDate(DM.PeriodFrom) +
+    ' - ' + TDateUtils.FormatDate(DM.PeriodTo);
   ApplyLanguage;
 
   grdData.ColCount := 1 + FLottery.MainCount + FLottery.ExtraCount;
@@ -95,6 +100,7 @@ end;
 procedure TfrmDraws.ApplyLanguage;
 begin
   lblTitle.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'DRAW_RESULTS');
+  lblPeriod.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'PERIOD');
   btnAdd.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BTN_ADD');
   btnEdit.Caption :=  TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'BTN_EDIT');
 end;

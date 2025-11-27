@@ -46,9 +46,9 @@ object frmDraws: TfrmDraws
     object grdData: TDrawGrid
       AlignWithMargins = True
       Left = 3
-      Top = 37
+      Top = 68
       Width = 614
-      Height = 379
+      Height = 348
       Margins.Top = 10
       Align = alClient
       BevelInner = bvNone
@@ -63,6 +63,8 @@ object frmDraws: TfrmDraws
       TabOrder = 0
       OnDrawCell = grdDataDrawCell
       OnSelectCell = grdDataSelectCell
+      ExplicitTop = 200
+      ExplicitHeight = 216
     end
     object pnlButtons: TPanel
       Left = 0
@@ -96,6 +98,49 @@ object frmDraws: TfrmDraws
         Enabled = False
         TabOrder = 1
         OnClick = btnEditClick
+      end
+    end
+    object pnlPeriod: TPanel
+      AlignWithMargins = True
+      Left = 3
+      Top = 30
+      Width = 614
+      Height = 25
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 2
+      object lblPeriod: TLabel
+        AlignWithMargins = True
+        Left = 0
+        Top = 3
+        Width = 49
+        Height = 19
+        Margins.Left = 0
+        Align = alLeft
+        Caption = 'lblPeriod'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitHeight = 15
+      end
+      object lblPeriodValue: TLabel
+        AlignWithMargins = True
+        Left = 55
+        Top = 3
+        Width = 79
+        Height = 19
+        Align = alLeft
+        Caption = 'lblPeriodValue'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitHeight = 15
       end
     end
   end
