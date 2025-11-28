@@ -190,6 +190,5 @@ object fmMain: TfmMain
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitWidth = 581
   end
 end

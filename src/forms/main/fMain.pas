@@ -8,7 +8,7 @@ uses
   Vcl.ComCtrls, System.Rtti,
   dmMain,
   uDateUtils, uTranslations, uLanguage, uLottery,
-  frDraws, frFrequency, frGaps, frNumberRythm;
+  frDraws, frFrequency, frGaps, frRythm;
 
 type
   TFrameClass = class of TFrame;
@@ -146,7 +146,7 @@ end;
 
 procedure TfmMain.btnNumberRythmClick(Sender: TObject);
 begin
-  SetFrame(TfrmNumberRythm);
+  SetFrame(TfrmRythm);
 end;
 
 procedure TfmMain.cmbLanguagesChange(Sender: TObject);
@@ -209,8 +209,8 @@ begin
       SetFrame(TfrmDraws)
     else if FCurrentFrame is TfrmFrequency then
       SetFrame(TfrmFrequency)
-    else if FCurrentFrame is TfrmNumberRythm then
-      SetFrame(TfrmNumberRythm);
+    else if FCurrentFrame is TfrmRythm then
+      SetFrame(TfrmRythm);
   end;
 end;
 

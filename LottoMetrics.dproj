@@ -173,8 +173,8 @@
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="src\frames\frNumberRythm.pas">
-            <Form>frmNumberRythm</Form>
+        <DCCReference Include="src\frames\frRythm.pas">
+            <Form>frmRythm</Form>
             <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
