@@ -17,7 +17,6 @@ object frmNumberRythm: TfrmNumberRythm
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 620
     object lblTitle: TLabel
       AlignWithMargins = True
       Left = 3
@@ -52,7 +51,6 @@ object frmNumberRythm: TfrmNumberRythm
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 614
       object lblPeriod: TLabel
         AlignWithMargins = True
         Left = 0
@@ -177,18 +175,16 @@ object frmNumberRythm: TfrmNumberRythm
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitLeft = 353
-      ExplicitWidth = 267
       object lblCntHint: TLabel
         AlignWithMargins = True
         Left = 0
-        Top = 52
+        Top = 53
         Width = 417
         Height = 15
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
-        Margins.Bottom = 0
+        Margins.Bottom = 5
         Align = alTop
         Caption = 'lblCntHint'
         Font.Charset = ANSI_CHARSET
@@ -197,26 +193,25 @@ object frmNumberRythm: TfrmNumberRythm
         Font.Name = 'Segoe UI'
         Font.Style = [fsItalic]
         ParentFont = False
-        ExplicitTop = 50
+        ExplicitTop = 52
         ExplicitWidth = 55
       end
-      object lblAvgInterval: TLabel
+      object lblAvgIntervalHint: TLabel
         AlignWithMargins = True
         Left = 0
-        Top = 95
+        Top = 97
         Width = 417
         Height = 15
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
+        Margins.Bottom = 5
         Align = alTop
-        Caption = 'lblAvgInterval'
+        Caption = 'lblAvgIntervalHint'
         WordWrap = True
-        ExplicitLeft = 3
-        ExplicitTop = 102
-        ExplicitWidth = 73
+        ExplicitWidth = 96
       end
-      object lblUniformity: TLabel
+      object lblUniformityHint: TLabel
         AlignWithMargins = True
         Left = 0
         Top = 141
@@ -225,24 +220,65 @@ object frmNumberRythm: TfrmNumberRythm
         Margins.Left = 0
         Margins.Top = 0
         Margins.Right = 0
+        Margins.Bottom = 5
         Align = alTop
-        Caption = 'lblUniformity'
-        ExplicitLeft = 3
-        ExplicitTop = 136
-        ExplicitWidth = 70
+        Caption = 'lblUniformityHint'
+        ExplicitWidth = 93
+      end
+      object bvlCnt: TBevel
+        Left = 0
+        Top = 27
+        Width = 417
+        Height = 5
+        Align = alTop
+        Shape = bsTopLine
+        ExplicitTop = 31
+      end
+      object bvlNumber: TBevel
+        Left = 0
+        Top = 0
+        Width = 417
+        Height = 3
+        Align = alTop
+        Shape = bsTopLine
+      end
+      object bvlAvgInterval: TBevel
+        Left = 0
+        Top = 73
+        Width = 417
+        Height = 3
+        Align = alTop
+        Shape = bsTopLine
+        ExplicitTop = 68
+      end
+      object bvlUniformity: TBevel
+        Left = 0
+        Top = 117
+        Width = 417
+        Height = 3
+        Align = alTop
+        Shape = bsTopLine
+        ExplicitTop = 113
+      end
+      object bvlUniformityBottom: TBevel
+        Left = 0
+        Top = 161
+        Width = 417
+        Height = 3
+        Align = alTop
+        Shape = bsBottomLine
       end
       object pnlNumber: TPanel
         AlignWithMargins = True
         Left = 0
-        Top = 3
+        Top = 6
         Width = 417
-        Height = 25
+        Height = 18
         Margins.Left = 0
         Margins.Right = 0
         Align = alTop
         Alignment = taLeftJustify
         BevelOuter = bvNone
-        Caption = 'pnlNumber'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
@@ -250,14 +286,13 @@ object frmNumberRythm: TfrmNumberRythm
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
-        ExplicitLeft = 3
-        ExplicitWidth = 267
+        ExplicitTop = 3
         object dbtNumber: TDBText
           AlignWithMargins = True
           Left = 349
           Top = 3
           Width = 65
-          Height = 19
+          Height = 12
           Align = alRight
           Alignment = taRightJustify
           DataField = 'NUMBER'
@@ -272,11 +307,23 @@ object frmNumberRythm: TfrmNumberRythm
           ExplicitTop = 8
           ExplicitHeight = 17
         end
+        object lblNumber: TLabel
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 59
+          Height = 12
+          Align = alLeft
+          Caption = 'lblNumber'
+          ExplicitLeft = 104
+          ExplicitTop = 8
+          ExplicitHeight = 15
+        end
       end
       object pnlCnt: TPanel
         AlignWithMargins = True
         Left = 0
-        Top = 34
+        Top = 35
         Width = 417
         Height = 18
         Margins.Left = 0
@@ -285,15 +332,14 @@ object frmNumberRythm: TfrmNumberRythm
         Align = alTop
         Alignment = taLeftJustify
         BevelOuter = bvNone
-        Caption = 'pnlCnt'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
-        Locked = True
         ParentFont = False
         TabOrder = 1
+        ExplicitTop = 34
         object dbtCnt: TDBText
           AlignWithMargins = True
           Left = 349
@@ -314,21 +360,31 @@ object frmNumberRythm: TfrmNumberRythm
           ExplicitTop = 8
           ExplicitHeight = 17
         end
+        object lblCnt: TLabel
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 32
+          Height = 12
+          Align = alLeft
+          Caption = 'lblCnt'
+          ExplicitLeft = 56
+          ExplicitTop = 0
+          ExplicitHeight = 15
+        end
       end
       object pnlAvgInterval: TPanel
         AlignWithMargins = True
         Left = 0
-        Top = 77
+        Top = 79
         Width = 417
         Height = 18
         Margins.Left = 0
-        Margins.Top = 10
         Margins.Right = 0
         Margins.Bottom = 0
         Align = alTop
         Alignment = taLeftJustify
         BevelOuter = bvNone
-        Caption = 'pnlAvgInterval'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
@@ -336,6 +392,7 @@ object frmNumberRythm: TfrmNumberRythm
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 2
+        ExplicitTop = 77
         object dbtAvgInterval: TDBText
           AlignWithMargins = True
           Left = 349
@@ -356,6 +413,18 @@ object frmNumberRythm: TfrmNumberRythm
           ExplicitTop = 8
           ExplicitHeight = 17
         end
+        object lblAvgInterval: TLabel
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 79
+          Height = 12
+          Align = alLeft
+          Caption = 'lblAvgInterval'
+          ExplicitLeft = 128
+          ExplicitTop = 8
+          ExplicitHeight = 15
+        end
       end
       object pnlUniformity: TPanel
         AlignWithMargins = True
@@ -364,13 +433,11 @@ object frmNumberRythm: TfrmNumberRythm
         Width = 417
         Height = 18
         Margins.Left = 0
-        Margins.Top = 10
         Margins.Right = 0
         Margins.Bottom = 0
         Align = alTop
         Alignment = taLeftJustify
         BevelOuter = bvNone
-        Caption = 'pnlUniformity'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
@@ -378,7 +445,6 @@ object frmNumberRythm: TfrmNumberRythm
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 3
-        ExplicitTop = 126
         object dbtUniformity: TDBText
           AlignWithMargins = True
           Left = 349
@@ -398,6 +464,14 @@ object frmNumberRythm: TfrmNumberRythm
           ExplicitLeft = 336
           ExplicitTop = 0
           ExplicitHeight = 17
+        end
+        object lblUniformity: TLabel
+          AlignWithMargins = True
+          Left = 99
+          Top = 0
+          Width = 74
+          Height = 15
+          Caption = 'lblUniformity'
         end
       end
     end

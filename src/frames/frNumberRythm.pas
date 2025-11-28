@@ -34,13 +34,22 @@ type
     lblCntHint: TLabel;
     dbtCnt: TDBText;
     pnlAvgInterval: TPanel;
-    lblAvgInterval: TLabel;
+    lblAvgIntervalHint: TLabel;
     pnlUniformity: TPanel;
-    lblUniformity: TLabel;
+    lblUniformityHint: TLabel;
     dbtAvgInterval: TDBText;
     dbtUniformity: TDBText;
     lblDrawsCount: TLabel;
     lblDrawsCountTitle: TLabel;
+    bvlCnt: TBevel;
+    bvlNumber: TBevel;
+    bvlAvgInterval: TBevel;
+    bvlUniformity: TBevel;
+    bvlUniformityBottom: TBevel;
+    lblNumber: TLabel;
+    lblCnt: TLabel;
+    lblAvgInterval: TLabel;
+    lblUniformity: TLabel;
     procedure DBGridTitleClick(Column: TColumn);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -86,13 +95,13 @@ begin
     DBGrid.Columns[i].Title.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode,
       DBGrid.Columns[i].FieldName);
 
-  pnlNumber.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER');
-  pnlCnt.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER_RYTHM_CNT_DETAILS');
+  lblNumber.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER');
+  lblCnt.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER_RYTHM_CNT_DETAILS');
   lblCntHint.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER_RYTHM_CNT_HINT');
-  pnlAvgInterval.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER_RYTHM_AVG_INTERVAL_DETAILS');
-  lblAvgInterval.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER_RYTHM_AVG_INTERVAL_HINT');
-  pnlUniformity.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER_RYTHM_UNIFORMITY_DETAILS');
-  lblUniformity.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER_RYTHM_UNIFORMITY_HINT');
+  lblAvgInterval.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER_RYTHM_AVG_INTERVAL_DETAILS');
+  lblAvgIntervalHint.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER_RYTHM_AVG_INTERVAL_HINT');
+  lblUniformity.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER_RYTHM_UNIFORMITY_DETAILS');
+  lblUniformityHint.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'NUMBER_RYTHM_UNIFORMITY_HINT');
   lblDrawsCountTitle.Caption := TTranslations.GetText(DM.CurrentLanguage.IsoCode, 'DRAWS_COUNT');
 end;
 
