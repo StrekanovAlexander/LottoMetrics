@@ -22,7 +22,8 @@ uses
   uAnalyticsRepo in 'src\data\uAnalyticsRepo.pas',
   uAnalyticRecords in 'src\models\uAnalyticRecords.pas',
   fWait in 'src\forms\fWait.pas' {fmWait},
-  frGaps in 'src\frames\frGaps.pas' {frmGaps: TFrame};
+  frGaps in 'src\frames\frGaps.pas' {frmGaps: TFrame},
+  frNumberRythm in 'src\frames\frNumberRythm.pas' {frmNumberRythm: TFrame};
 
 {$R *.res}
 

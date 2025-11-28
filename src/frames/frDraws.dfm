@@ -138,35 +138,30 @@ object frmDraws: TfrmDraws
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitLeft = 55
         ExplicitHeight = 15
       end
       object lblDrawsCount: TLabel
         AlignWithMargins = True
-        Left = 530
+        Left = 533
         Top = 3
-        Width = 81
+        Width = 78
         Height = 19
         Align = alRight
         Caption = 'lblDrawsCount'
-        Font.Charset = RUSSIAN_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ExplicitLeft = 533
+        ExplicitLeft = 448
+        ExplicitTop = 8
         ExplicitHeight = 15
       end
       object lblDrawsCountTitle: TLabel
         AlignWithMargins = True
-        Left = 424
+        Left = 427
         Top = 3
         Width = 100
         Height = 19
         Align = alRight
         Caption = 'lblDrawsCountTitle'
-        ExplicitLeft = 490
+        ExplicitLeft = 408
+        ExplicitTop = 16
         ExplicitHeight = 15
       end
     end

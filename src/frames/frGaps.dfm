@@ -151,9 +151,6 @@ object frmGaps: TfrmGaps
           Align = alClient
           Caption = 'gbxExtraNumbers'
           TabOrder = 1
-          ExplicitLeft = 314
-          ExplicitWidth = 285
-          ExplicitHeight = 203
           object DBGridExtra: TDBGrid
             AlignWithMargins = True
             Left = 7

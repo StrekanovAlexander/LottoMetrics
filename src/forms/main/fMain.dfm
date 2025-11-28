@@ -1,11 +1,10 @@
 object fmMain: TfmMain
   Left = 0
   Top = 0
-  BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'LottoMetrics'
   ClientHeight = 561
-  ClientWidth = 784
+  ClientWidth = 984
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -169,16 +168,28 @@ object fmMain: TfmMain
       Caption = 'btnGaps'
       TabOrder = 6
       OnClick = btnGapsClick
-      ExplicitTop = 286
+    end
+    object btnNumberRythm: TButton
+      AlignWithMargins = True
+      Left = 13
+      Top = 326
+      Width = 174
+      Height = 30
+      Margins.Top = 5
+      Align = alTop
+      Caption = 'btnNumberRythm'
+      TabOrder = 7
+      OnClick = btnNumberRythmClick
     end
   end
   object pnlMain: TPanel
     Left = 203
     Top = 0
-    Width = 581
+    Width = 781
     Height = 561
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitWidth = 581
   end
 end

@@ -8,7 +8,7 @@ uses
   Vcl.ComCtrls, System.Rtti,
   dmMain,
   uDateUtils, uTranslations, uLanguage, uLottery,
-  frDraws, frFrequency, frGaps;
+  frDraws, frFrequency, frGaps, frNumberRythm;
 
 type
   TFrameClass = class of TFrame;
@@ -28,6 +28,7 @@ type
     lblLanguage: TLabel;
     bvlMain: TBevel;
     btnGaps: TButton;
+    btnNumberRythm: TButton;
     procedure FormCreate(Sender: TObject);
     procedure SetLanguages;
     procedure SetLotteries;
@@ -40,6 +41,7 @@ type
     procedure btnDrawsClick(Sender: TObject);
     procedure btnFrequencyClick(Sender: TObject);
     procedure btnGapsClick(Sender: TObject);
+    procedure btnNumberRythmClick(Sender: TObject);
   private
     FCurrentFrame: TFrame;
     FLottery: TLottery;
@@ -142,6 +144,11 @@ begin
   SetFrame(TfrmGaps);
 end;
 
+procedure TfmMain.btnNumberRythmClick(Sender: TObject);
+begin
+  SetFrame(TfrmNumberRythm);
+end;
+
 procedure TfmMain.cmbLanguagesChange(Sender: TObject);
 var
   SelectedLang: TLanguage;
@@ -201,7 +208,9 @@ begin
     if FCurrentFrame is TfrmDraws then
       SetFrame(TfrmDraws)
     else if FCurrentFrame is TfrmFrequency then
-      SetFrame(TfrmFrequency);
+      SetFrame(TfrmFrequency)
+    else if FCurrentFrame is TfrmNumberRythm then
+      SetFrame(TfrmNumberRythm);
   end;
 end;
 
@@ -216,6 +225,7 @@ begin
   btnDraws.Caption := TTranslations.GetText(IsoCode, 'DRAWS');
   btnFrequency.Caption := TTranslations.GetText(IsoCode, 'FREQUENCY_ANALYSIS');
   btnGaps.Caption := TTranslations.GetText(IsoCode, 'GAPS');
+  btnNumberRythm.Caption := TTranslations.GetText(IsoCode, 'NUMBER_RYTHM');
 end;
 
 // Destroy

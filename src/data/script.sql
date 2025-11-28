@@ -314,3 +314,85 @@ begin
   DO
     SUSPEND;
 end
+
+create or alter procedure get_number_rythm (
+    p_lottery_id integer,
+    p_start_date date,
+    p_end_date date,
+    p_number_kind varchar(5))
+returns (
+    number smallint,
+    cnt integer,
+    avg_interval numeric(10,2),
+    uniformity numeric(10,4))
+as
+declare variable cur_draw integer;
+declare variable last_draw integer;
+declare variable interval integer;
+declare variable intervals_sum numeric(18,4);
+declare variable intervals_cnt integer;
+declare variable intervals_sumsq numeric(18,4);
+declare variable mean numeric(18,6);
+declare variable variance numeric(18,6);
+BEGIN
+  FOR
+    SELECT DISTINCT N.NUMBER
+    FROM DRAWS D
+    JOIN DRAW_NUMBERS N ON N.DRAW_ID = D.ID
+    WHERE D.LOTTERY_ID = :p_lottery_id
+      AND D.DRAW_DATE BETWEEN :p_start_date AND :p_end_date
+      AND N.NUMBER_KIND = :p_number_kind
+    ORDER BY N.NUMBER
+    INTO :number
+  DO
+  BEGIN
+    cnt = 0;
+    intervals_sum = 0;
+    intervals_sumsq = 0;
+    intervals_cnt = 0;
+    last_draw = NULL;
+
+    FOR
+      SELECT D.ID
+      FROM DRAWS D
+      JOIN DRAW_NUMBERS N ON N.DRAW_ID = D.ID
+      WHERE D.LOTTERY_ID = :p_lottery_id
+        AND D.DRAW_DATE BETWEEN :p_start_date AND :p_end_date
+        AND N.NUMBER_KIND = :p_number_kind
+        AND N.NUMBER = :number
+      ORDER BY D.ID
+      INTO :cur_draw
+    DO
+    BEGIN
+      IF (last_draw IS NULL) THEN
+        last_draw = cur_draw;
+      ELSE
+      BEGIN
+        interval = cur_draw - last_draw;
+        intervals_sum = intervals_sum + interval;
+        intervals_sumsq = intervals_sumsq + (interval * interval);
+        intervals_cnt = intervals_cnt + 1;
+        last_draw = cur_draw;
+      END
+
+      cnt = cnt + 1;
+    END
+
+    IF (intervals_cnt > 0) THEN
+    BEGIN
+      mean = intervals_sum / intervals_cnt;
+      variance = (intervals_sumsq / intervals_cnt) - (mean * mean);
+      IF (variance < 0) THEN variance = 0;
+
+      avg_interval = CAST(mean AS NUMERIC(10,2));
+      uniformity = 1 - (SQRT(variance) / NULLIF(mean, 0));
+    END
+    ELSE
+    BEGIN
+      avg_interval = NULL;
+      uniformity = NULL;
+    END
+
+    SUSPEND;
+  END
+END
